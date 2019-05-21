@@ -8,16 +8,18 @@ function RadioGroup({
   className: classNameProp,
   classNameLegend
 }) {
-  <fieldset
-    role="group"
-    aria-labelledby={`radio_${title}`}
-    className={classnames("zep-typo--normal-3", classNameProp)}
-  >
-    <legend id={`radio_${title}`} className={classNameLegend}>
-      {title}
-    </legend>
-    {children}
-  </fieldset>;
+  return (
+    <fieldset
+      role="group"
+      aria-labelledby={`radio_${title}`}
+      className={classnames("zep-typo--normal-3", classNameProp)}
+    >
+      <legend id={`radio_${title}`} className={classNameLegend}>
+        {title}
+      </legend>
+      {children}
+    </fieldset>
+  );
 }
 
 RadioGroup.propTypes = {

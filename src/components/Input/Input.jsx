@@ -10,19 +10,21 @@ function Input({
   label,
   placeholder
 }) {
-  <div className="zep-form-container">
-    <input
-      type="text"
-      className={classnames(classNameProp, "zep-input")}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      id={id}
-    />
-    <label className="zep-form-container__label" htmlFor={id}>
-      {label}
-    </label>
-  </div>;
+  return (
+    <div className="zep-form-container">
+      <input
+        type="text"
+        className={classnames(classNameProp, "zep-input")}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        id={id}
+      />
+      <label className="zep-form-container__label" htmlFor={id}>
+        {label}
+      </label>
+    </div>
+  );
 }
 Input.propTypes = {
   className: PropTypes.string,

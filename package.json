@@ -1,24 +1,26 @@
 {
   "name": "zeppelin-element-library-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "license": "MIT",
   "files": [
     "dist",
     "README.md"
   ],
   "repository": {
     "type": "git",
-    "url": "URL_OF_YOUR_REPOSITORY"
+    "url": "https://github.com/zepdev/zeppelin-element-library-react"
   },
   "dependencies": {
+    "@material-ui/icons": "^3.0.2",
     "classnames": "^2.2.6",
     "downshift": "^3.2.10",
     "react-jss": "^8.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "build": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -38,9 +40,9 @@
     ]
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "react-scripts": "3.0.1",
-    "react-test-renderer": "^16.3.2"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "^3.0.1"
   },
   "peerDependencies": {
     "react": "^16.3.2",
