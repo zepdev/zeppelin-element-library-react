@@ -1,6 +1,6 @@
 {
   "name": "zeppelin-element-library-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "license": "MIT",
@@ -13,7 +13,6 @@
     "url": "https://github.com/zepdev/zeppelin-element-library-react"
   },
   "dependencies": {
-    "@material-ui/icons": "^3.0.2",
     "classnames": "^2.2.6",
     "downshift": "^3.2.10",
     "react-jss": "^8.6.1"
