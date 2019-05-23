@@ -22,7 +22,17 @@
     "start": "react-scripts start",
     "build": "rm -rf dist && NODE_ENV=production babel src/components --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "prettier": "prettier src/**/*.js src/**/*.jsx",
+    "publish:check": "semantic-release --branch development --no-ci --dry-run",
+    "publish:dev": "yarn publish --tag=next",
+    "sonar-scanner": "sonar-scanner",
+    "lint:eslint": "eslint src/**/*.js src/**/*.jsx",
+    "lint:prettier": "yarn prettier --check",
+    "lint:sonarqube": "yarn lint:eslint -f json -o report.json",
+    "lint": "yarn lint:eslint && yarn lint:prettier"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,9 +50,20 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.6.1",
+    "@commitlint/config-conventional": "^7.6.0",
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
+    "commitizen": "^3.1.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
+    "prettier": "^1.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "^3.0.1"
+    "react-scripts": "^3.0.1",
+    "semantic-release": "^15.13.12",
+    "sonarqube-scanner": "^2.4.0"
   },
   "peerDependencies": {
     "react": "^16.3.2",
