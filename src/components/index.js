@@ -1,4 +1,4 @@
-export { default as Button } from "./components/Button";
+export { default as Button } from './components/Button';
 // export { default as ButtonBase } from "./ButtonBase";
 // export { default as Checkbox } from "./Checkbox";
 // export { default as GridCol } from "./GridCol";

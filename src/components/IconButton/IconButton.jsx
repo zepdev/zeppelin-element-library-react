@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import ButtonBase from "./ButtonBase/ButtonBase";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import ButtonBase from './ButtonBase/ButtonBase';
 
 function IconButton({
   classes,
@@ -11,7 +11,7 @@ function IconButton({
 }) {
   const children = childrenProp
     ? React.cloneElement(childrenProp, {
-        className: classnames("zep-button__icon", childrenProp.props.className)
+        className: classnames('zep-button__icon', childrenProp.props.className)
       })
     : null;
 
