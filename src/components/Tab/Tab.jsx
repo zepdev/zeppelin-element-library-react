@@ -61,28 +61,30 @@ function Tab({
   selected,
   classes
 }) {
-  <ButtonBase
-    className={classnames(classes.root, classNameProp, {
-      [classes.selected]: selected,
-      [classes.normal]: !fullWidth,
-      [classes.fullWidth]: fullWidth
-    })}
-    onClick={e => onClick(e, value)}
-  >
-    <p
-      className={classnames(
-        classes.label,
-        {
-          [classes.selected]: selected,
-          [classes.labelPrimary]: color === 'primary',
-          [classes.labelSecondary]: color === 'secondary'
-        },
-        'zep-typo--normal-4'
-      )}
+  return (
+    <ButtonBase
+      className={classnames(classes.root, classNameProp, {
+        [classes.selected]: selected,
+        [classes.normal]: !fullWidth,
+        [classes.fullWidth]: fullWidth
+      })}
+      onClick={e => onClick(e, value)}
     >
-      {label}
-    </p>
-  </ButtonBase>;
+      <p
+        className={classnames(
+          classes.label,
+          {
+            [classes.selected]: selected,
+            [classes.labelPrimary]: color === 'primary',
+            [classes.labelSecondary]: color === 'secondary'
+          },
+          'zep-typo--normal-4'
+        )}
+      >
+        {label}
+      </p>
+    </ButtonBase>
+  );
 }
 
 Tab.propTypes = {

@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 function Tag({ className: classNameProp }) {
-  <span className={classnames(classNameProp, 'zep-tag')}>
-    Tag
-    <i className="zepicons zepicons-close" />
-  </span>;
+  return (
+    <span className={classnames(classNameProp, 'zep-tag')}>
+      Tag
+      <i className="zepicons zepicons-close" />
+    </span>
+  );
 }
 
 Tag.propTypes = {
