@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 function RadioGroup({
   title,
@@ -12,7 +12,7 @@ function RadioGroup({
     <fieldset
       role="group"
       aria-labelledby={`radio_${title}`}
-      className={classnames("zep-typo--normal-3", classNameProp)}
+      className={classnames('zep-typo--normal-3', classNameProp)}
     >
       <legend id={`radio_${title}`} className={classNameLegend}>
         {title}

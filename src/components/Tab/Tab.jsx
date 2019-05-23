@@ -1,50 +1,50 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import withStyles from "react-jss";
-import ButtonBase from "../ButtonBase/ButtonBase";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import withStyles from 'react-jss';
+import ButtonBase from '../ButtonBase/ButtonBase';
 
 const styles = theme => ({
   root: {
-    fontSize: "100%",
-    font: "inherit",
+    fontSize: '100%',
+    font: 'inherit',
     paddingTop: `${theme.spacing.component.s.rem}rem`,
-    "&:hover": {
+    '&:hover': {
       borderBottom: `2px solid ${theme.colors.primary.indigoBlue.hex}`,
-      "& $labelPrimary": {
+      '& $labelPrimary': {
         color: theme.colors.gray.grayDark.hex
       },
-      "& $labelSecondary": {
+      '& $labelSecondary': {
         color: theme.colors.gray.grayLight.hex
       }
     },
-    "&$selected": {
+    '&$selected': {
       borderBottom: `2px solid ${theme.colors.primary.indigoBlue.hex}`
     }
   },
   normal: {
-    flexBasis: "100%"
+    flexBasis: '100%'
   },
   [`@media (min-width: ${theme.breakpoints.s})`]: {
     normal: {
-      flexBasis: "25%"
+      flexBasis: '25%'
     }
   },
   fullWidth: {
-    flexBasis: "100%"
+    flexBasis: '100%'
   },
   label: {
-    textAlign: "center"
+    textAlign: 'center'
   },
   labelPrimary: {
     color: theme.colors.gray.grayLight.hex,
-    "&$selected": {
+    '&$selected': {
       color: theme.colors.gray.grayDark.hex
     }
   },
   labelSecondary: {
     color: theme.colors.gray.white.hex,
-    "&$selected": {
+    '&$selected': {
       color: theme.colors.gray.grayMid.hex
     }
   },
@@ -74,10 +74,10 @@ function Tab({
         classes.label,
         {
           [classes.selected]: selected,
-          [classes.labelPrimary]: color === "primary",
-          [classes.labelSecondary]: color === "secondary"
+          [classes.labelPrimary]: color === 'primary',
+          [classes.labelSecondary]: color === 'secondary'
         },
-        "zep-typo--normal-4"
+        'zep-typo--normal-4'
       )}
     >
       {label}
@@ -88,14 +88,14 @@ function Tab({
 Tab.propTypes = {
   classes: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
-  color: PropTypes.oneOf(["primary", "secondary"]),
+  color: PropTypes.oneOf(['primary', 'secondary']),
   onClick: PropTypes.func,
   value: PropTypes.number,
   selected: PropTypes.bool
 };
 
 Tab.defaultProps = {
-  color: "primary"
+  color: 'primary'
 };
 
 export default withStyles(styles)(Tab);

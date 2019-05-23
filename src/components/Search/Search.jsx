@@ -1,33 +1,33 @@
-import React from "react";
-import PropTypes from "prop-types";
-import withStyles from "react-jss";
-import classnames from "classnames";
-import Downshift from "downshift";
-import SearchIcon from "../icons/SearchIcon";
-import { navigate } from "gatsby";
+import React from 'react';
+import PropTypes from 'prop-types';
+import withStyles from 'react-jss';
+import classnames from 'classnames';
+import Downshift from 'downshift';
+import SearchIcon from '../icons/SearchIcon';
+import { navigate } from 'gatsby';
 
 const styles = theme => ({
   ul: {
-    position: "absolute",
+    position: 'absolute',
     zIndex: 2000,
     left: 0,
     right: 0
   },
   li: {
-    padding: "0.625rem 1.125rem",
-    textTransform: "capitalize",
+    padding: '0.625rem 1.125rem',
+    textTransform: 'capitalize',
     color: theme.colors.gray.grayDark.hex,
     textDecorationColor: theme.colors.gray.grayDark.hex
   },
   container: {
-    width: "100%"
+    width: '100%'
   }
 });
 
 function Search({ variant, items, placeholder, classes }) {
-  <div role={variant === "landmark" ? "search" : null}>
+  <div role={variant === 'landmark' ? 'search' : null}>
     <Downshift
-      itemToString={item => (item ? item.value : "")}
+      itemToString={item => (item ? item.value : '')}
       onChange={selection => navigate(selection.link)}
     >
       {({
@@ -40,7 +40,7 @@ function Search({ variant, items, placeholder, classes }) {
         highlightedIndex,
         selectedItem
       }) => (
-        <div className={classnames(classes.container, "zep-search")}>
+        <div className={classnames(classes.container, 'zep-search')}>
           <label {...getLabelProps()} className="zep-visually-hidden">
             {placeholder}
           </label>
@@ -52,7 +52,7 @@ function Search({ variant, items, placeholder, classes }) {
           {isOpen ? (
             <ul
               {...getMenuProps({
-                className: classnames("zep-select__list", classes.ul)
+                className: classnames('zep-select__list', classes.ul)
               })}
             >
               {items
@@ -66,8 +66,8 @@ function Search({ variant, items, placeholder, classes }) {
                       className: classes.li,
                       style: {
                         backgroundColor:
-                          highlightedIndex === index ? "#eceeef" : "white",
-                        fontWeight: selectedItem === item ? "bold" : "normal"
+                          highlightedIndex === index ? '#eceeef' : 'white',
+                        fontWeight: selectedItem === item ? 'bold' : 'normal'
                       }
                     })}
                   >
@@ -84,7 +84,7 @@ function Search({ variant, items, placeholder, classes }) {
 
 Search.propTypes = {
   classes: PropTypes.object.isRequired,
-  variant: PropTypes.oneOf(["landmark"]),
+  variant: PropTypes.oneOf(['landmark']),
   items: PropTypes.array,
   placeholder: PropTypes.string.isRequired
 };

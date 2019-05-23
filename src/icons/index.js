@@ -69,7 +69,9 @@ export { default as ZepiconsMap } from './ZepiconsMap';
 export { default as ZepiconsMapMarker } from './ZepiconsMapMarker';
 export { default as ZepiconsMenu } from './ZepiconsMenu';
 export { default as ZepiconsMinus } from './ZepiconsMinus';
-export { default as ZepiconsNavigationDropdown } from './ZepiconsNavigationDropdown';
+export {
+  default as ZepiconsNavigationDropdown
+} from './ZepiconsNavigationDropdown';
 export { default as ZepiconsNextPage } from './ZepiconsNextPage';
 export { default as ZepiconsOpenInNew } from './ZepiconsOpenInNew';
 export { default as ZepiconsPhone } from './ZepiconsPhone';
@@ -80,7 +82,9 @@ export { default as ZepiconsPsPs } from './ZepiconsPsPs';
 export { default as ZepiconsPsService } from './ZepiconsPsService';
 export { default as ZepiconsPsUsed } from './ZepiconsPsUsed';
 export { default as ZepiconsReload } from './ZepiconsReload';
-export { default as ZepiconsRentalInfrastructure } from './ZepiconsRentalInfrastructure';
+export {
+  default as ZepiconsRentalInfrastructure
+} from './ZepiconsRentalInfrastructure';
 export { default as ZepiconsRentalLogistics } from './ZepiconsRentalLogistics';
 export { default as ZepiconsRentalRent } from './ZepiconsRentalRent';
 export { default as ZepiconsRu } from './ZepiconsRu';

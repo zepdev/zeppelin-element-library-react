@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Downshift from "downshift";
-import NavigationDropdownIcon from "../icons/NavigationDropdownIcon";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Downshift from 'downshift';
+import NavigationDropdownIcon from '../icons/NavigationDropdownIcon';
 
 function Select({ items, onChange }) {
   return (
     <Downshift
       onChange={selection => onChange(selection.value)}
-      itemToString={item => (item ? item.value : "")}
+      itemToString={item => (item ? item.value : '')}
     >
       {({
         getItemProps,
@@ -22,8 +22,8 @@ function Select({ items, onChange }) {
         <div>
           <label
             {...getLabelProps({
-              className: "zep-select__label",
-              htmlFor: "zep-select"
+              className: 'zep-select__label',
+              htmlFor: 'zep-select'
             })}
           >
             Form Label
@@ -37,23 +37,23 @@ function Select({ items, onChange }) {
             aria-haspopup="true"
             aria-expanded={isOpen}
           >
-            {selectedItem ? selectedItem.value : "Select an item"}
+            {selectedItem ? selectedItem.value : 'Select an item'}
             <NavigationDropdownIcon className="zep-select__icon" />
           </button>
           {isOpen ? (
-            <ul {...getMenuProps({ className: "zep-select__list" })}>
+            <ul {...getMenuProps({ className: 'zep-select__list' })}>
               {items.filter(
                 item => !inputValue || item.value.includes(inputValue)
               ).length === 0 ? (
                 <li
                   {...getItemProps({
-                    item: { value: "no results" },
+                    item: { value: 'no results' },
                     index: 0,
-                    className: "zep-select__listitem",
+                    className: 'zep-select__listitem',
                     style: {
                       backgroundColor:
-                        highlightedIndex === 0 ? "lightgray" : "white",
-                      fontWeight: selectedItem === undefined ? "bold" : "normal"
+                        highlightedIndex === 0 ? 'lightgray' : 'white',
+                      fontWeight: selectedItem === undefined ? 'bold' : 'normal'
                     }
                   })}
                 >
@@ -70,11 +70,11 @@ function Select({ items, onChange }) {
                         key: `listItem${index}`,
                         index,
                         item,
-                        className: "zep-select__listitem",
+                        className: 'zep-select__listitem',
                         style: {
                           backgroundColor:
-                            highlightedIndex === index ? "lightgray" : "white",
-                          fontWeight: selectedItem === item ? "bold" : "normal"
+                            highlightedIndex === index ? 'lightgray' : 'white',
+                          fontWeight: selectedItem === item ? 'bold' : 'normal'
                         }
                       })}
                     >

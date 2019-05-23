@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-import withStyles from "react-jss";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import withStyles from 'react-jss';
 
 const styles = theme => ({
   root: {
-    display: "flex",
-    width: "100%",
+    display: 'flex',
+    width: '100%',
     background: theme.colors.gray.grayLightest.hex
   }
 });
