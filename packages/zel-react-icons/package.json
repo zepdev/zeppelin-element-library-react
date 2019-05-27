@@ -1,5 +1,5 @@
 {
-  "name": "@zel-react/icons",
+  "name": "@zel/react-icons",
   "version": "0.1.0",
   "private": false,
   "description": "Zeppelin Icons: Made from Material-UI Icons",
@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zepdev/zeppelin-element-library-react"
+    "url": "git+https://github.com/zepdev/zeppelin-element-library-react.git"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -31,5 +31,13 @@
     "node": ">=8.0.0"
   },
   "module": "./esm/index.js",
-  "typings": "./index.d.ts"
+  "typings": "./index.d.ts",
+  "bugs": {
+    "url": "https://github.com/zepdev/zeppelin-element-library-react/issues"
+  },
+  "homepage": "https://github.com/zepdev/zeppelin-element-library-react#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zlab"
 }
