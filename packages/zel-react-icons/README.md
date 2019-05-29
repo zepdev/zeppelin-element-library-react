@@ -1,14 +1,14 @@
-# Zeppelin Element Library React Component Icons: @zel-react/icons
+# Zeppelin Element Library React Component Icons: @zlab-de/zel-react-icons
 
 ```
-yarn add @zel-react/icons
+yarn add @zlab-de/zel-react-icons
 ```
 
 # How to use these icons
 
 ```
 import React from 'react'
-import ZepiconsCart from '@zel-react/icons/ZepiconsCart'
+import ZepiconsCart from '@zlab-de/zel-react-icons/ZepiconsCart'
 
 function MyComponent(){
     return(

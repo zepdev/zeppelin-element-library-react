@@ -1,20 +1,20 @@
 {
-  "name": "@material-ui/core",
-  "version": "4.0.0-rc.0",
+  "name": "@zlab-de/zel-react",
+  "version": "0.1.4",
   "private": false,
-  "author": "Material-UI Team",
-  "description": "React components that implement Google's Material Design.",
+  "author": "ZLab",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zepdev/zeppelin-element-library-react"
+  },
+  "description": "React Components for Zeppelin Element Library",
   "keywords": [
     "react",
     "react-component",
-    "material design",
-    "material-ui"
+    "zeppelin",
+    "ZLab"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mui-org/material-ui/issues"
-  },
-  "homepage": "https://material-ui.com/",
   "scripts": {
     "build": "yarn build:cjs && yarn build:esm && yarn build:es && yarn build:umd && yarn build:copy-files",
     "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ./babel.config.js ./src --out-dir ./build --ignore \"**/*.test.js\"",
@@ -24,7 +24,7 @@
     "build:copy-files": "node ./scripts/copy-files.js",
     "prebuild": "rimraf build",
     "release": "yarn build && npm publish build --tag next",
-    "test": "cd ../../ && cross-env NODE_ENV=test mocha 'packages/material-ui/**/*.test.js' --exclude '**/node_modules/**'",
+    "test": "cd ../../ && cross-env NODE_ENV=test mocha '/**/*.test.js' --exclude '**/node_modules/**'",
     "typescript": "tslint -p tsconfig.json \"{src,test}/**/*.{ts,tsx}\""
   },
   "peerDependencies": {
@@ -32,9 +32,10 @@
     "react-dom": "^16.8.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.2.0",
-    "clsx": "^1.0.2",
-    "downshift": "^3.2.10"
+    "@zlab-de/zel-react-icons": "^0.1.0",
+    "clsx": "^1.0.4",
+    "downshift": "^3.2.10",
+    "zeppelin-element-library": "^0.10.12"
   },
   "sideEffects": false,
   "publishConfig": {
@@ -119,7 +120,6 @@
     "lz-string": "^1.4.4",
     "next": "8.0.5-canary.15",
     "next-plugin-transpile-modules": "^2.0.0",
-    "notistack": "^0.5.0",
     "nyc": "^13.0.0",
     "postcss": "^7.0.0",
     "prettier": "^1.8.2",
@@ -150,8 +150,10 @@
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.0.0-beta.8",
     "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-copy": "^2.0.1",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-size-snapshot": "^0.8.0",
     "rollup-plugin-terser": "^4.0.4",
     "sinon": "^7.0.0",

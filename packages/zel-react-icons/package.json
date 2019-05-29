@@ -1,6 +1,6 @@
 {
-  "name": "@zel/react-icons",
-  "version": "0.1.0",
+  "name": "@zlab-de/zel-react-icons",
+  "version": "0.1.1",
   "private": false,
   "description": "Zeppelin Icons: Made from Material-UI Icons",
   "main": "./index.js",
@@ -39,5 +39,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "zlab"
+  "author": "zlab",
+  "devDependencies": {}
 }

@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
-const path = require("path");
-const fse = require("fs-extra");
-const glob = require("glob");
+const path = require('path');
+const fse = require('fs-extra');
+const glob = require('glob');
 
 const packagePath = process.cwd();
-const buildPath = path.join(packagePath, "./build");
-const srcPath = path.join(packagePath, "./src");
+const buildPath = path.join(packagePath, './build');
+const srcPath = path.join(packagePath, './src');
 
 async function includeFileInBuild(file) {
   const sourcePath = path.resolve(packagePath, file);
@@ -26,26 +26,26 @@ async function includeFileInBuild(file) {
  */
 async function createModulePackages({ from, to }) {
   const directoryPackages = glob
-    .sync("*/index.js", { cwd: from })
+    .sync('*/index.js', { cwd: from })
     .map(path.dirname);
 
   await Promise.all(
     directoryPackages.map(async directoryPackage => {
-      const packageJson = {
-        sideEffects: false,
-        module: path.join("../esm", directoryPackage, "index.js"),
-        typings: "./index.d.ts"
-      };
-      const packageJsonPath = path.join(to, directoryPackage, "package.json");
+      // const packageJson = {
+      //   sideEffects: false,
+      //   module: path.join('../esm', directoryPackage, 'index.js')
+      //   // typings: "./index.d.ts"
+      // };
+      const packageJsonPath = path.join(to, directoryPackage, 'package.json');
 
-      const [typingsExist] = await Promise.all([
-        fse.exists(path.join(to, directoryPackage, "index.d.ts")),
-        fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2))
-      ]);
+      // const [typingsExist] = await Promise.all([
+      //   fse.exists(path.join(to, directoryPackage, "index.d.ts")),
+      //   fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2))
+      // ]);
 
-      if (!typingsExist) {
-        throw new Error(`index.d.ts for ${directoryPackage} is missing`);
-      }
+      // if (!typingsExist) {
+      //   throw new Error(`index.d.ts for ${directoryPackage} is missing`);
+      // }
 
       return packageJsonPath;
     })
@@ -58,17 +58,24 @@ async function typescriptCopy({ from, to }) {
     return [];
   }
 
-  const files = glob.sync("**/*.d.ts", { cwd: from });
-  const cmds = files.map(file =>
-    fse.copy(path.resolve(from, file), path.resolve(to, file))
-  );
+  // const files = glob.sync('**/*.d.ts', { cwd: from });
+  // const cmds = files.map(file =>
+  //   fse.copy(path.resolve(from, file), path.resolve(to, file))
+  // );
+
+  const zelTheme = require('zeppelin-element-library/bundle/themes/theme.json');
+  const zelCss = require('zeppelin-element-library/bundle/zeppelin-element-library.css');
+  const cmds = [
+    fse.copy(zelTheme, path.resolve(to, file)),
+    fse.copy(zelCss, path.resolve(to, file))
+  ];
   return Promise.all(cmds);
 }
 
 async function createPackageFile() {
   const packageData = await fse.readFile(
-    path.resolve(packagePath, "./package.json"),
-    "utf8"
+    path.resolve(packagePath, './package.json'),
+    'utf8'
   );
   const {
     nyc,
@@ -80,16 +87,16 @@ async function createPackageFile() {
   const newPackageData = {
     ...packageDataOther,
     private: false,
-    main: "./index.js",
-    module: "./esm/index.js"
+    main: './index.js',
+    module: './esm/index.js'
     // typings: './index.d.ts',
   };
-  const targetPath = path.resolve(buildPath, "./package.json");
+  const targetPath = path.resolve(buildPath, './package.json');
 
   await fse.writeFile(
     targetPath,
     JSON.stringify(newPackageData, null, 2),
-    "utf8"
+    'utf8'
   );
   console.log(`Created package.json in ${targetPath}`);
 
@@ -97,12 +104,12 @@ async function createPackageFile() {
 }
 
 async function prepend(file, string) {
-  const data = await fse.readFile(file, "utf8");
-  await fse.writeFile(file, string + data, "utf8");
+  const data = await fse.readFile(file, 'utf8');
+  await fse.writeFile(file, string + data, 'utf8');
 }
 
 async function addLicense(packageData) {
-  const license = `/** @license Material-UI v${packageData.version}
+  const license = `/** @license ZLab v${packageData.version}
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -110,15 +117,15 @@ async function addLicense(packageData) {
 `;
   await Promise.all(
     [
-      "./index.js",
-      "./esm/index.js",
-      "./umd/material-ui.development.js",
-      "./umd/material-ui.production.min.js"
+      './index.js',
+      './esm/index.js',
+      './umd/zel-react.development.js',
+      './umd/zel-react.production.min.js'
     ].map(async file => {
       try {
         await prepend(path.resolve(buildPath, file), license);
       } catch (err) {
-        if (err.code === "ENOENT") {
+        if (err.code === 'ENOENT') {
           console.log(`Skipped license for ${file}`);
         } else {
           throw err;
@@ -134,12 +141,11 @@ async function run() {
 
     await Promise.all(
       [
-        // use enhanced readme from workspace root for `@material-ui/core`
-        packageData.name === "@material-ui/core"
-          ? "../../README.md"
-          : "./README.md",
-        "../../CHANGELOG.md",
-        "../../LICENSE"
+        packageData.name === '@zlab-de/zel-react'
+          ? '../../README.md'
+          : './README.md',
+        '../../CHANGELOG.md',
+        '../../LICENSE'
       ].map(file => includeFileInBuild(file))
     );
 
