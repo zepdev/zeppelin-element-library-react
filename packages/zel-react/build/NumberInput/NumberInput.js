@@ -7,6 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -26,7 +30,8 @@ function NumberInput(_ref) {
       count = _ref.count,
       onChange = _ref.onChange,
       onPlus = _ref.onPlus,
-      onMinus = _ref.onMinus;
+      onMinus = _ref.onMinus,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["label", "count", "onChange", "onPlus", "onMinus"]);
 
   var handleChange = function handleChange(event) {
     var value = parseInt(event.target.value, 10);
@@ -34,9 +39,9 @@ function NumberInput(_ref) {
     onChange(count);
   };
 
-  return _react.default.createElement("div", {
+  return _react.default.createElement("div", (0, _extends2.default)({
     className: "zep-numberinput"
-  }, _react.default.createElement(_IconButton.default, {
+  }, other), _react.default.createElement(_IconButton.default, {
     onClick: onMinus
   }, _ref2), _react.default.createElement("label", {
     className: "zep-visually-hidden",
@@ -57,7 +62,7 @@ process.env.NODE_ENV !== "production" ? NumberInput.propTypes = {
   onPlus: _propTypes.default.func.isRequired,
   onMinus: _propTypes.default.func.isRequired,
   onChange: _propTypes.default.func.isRequired,
-  count: _propTypes.default.number.isRequired
+  count: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]).isRequired
 } : void 0;
 var _default = NumberInput;
 exports.default = _default;

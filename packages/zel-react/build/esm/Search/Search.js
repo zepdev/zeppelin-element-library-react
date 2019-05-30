@@ -1,7 +1,7 @@
 import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import Downshift from 'downshift';
 import ZepiconsSearch from '@zlab-de/zel-react-icons/ZepiconsSearch';
 
@@ -14,11 +14,12 @@ var Search = function Search(_ref) {
       itemsProp = _ref.items,
       placeholder = _ref.placeholder,
       _onChange = _ref.onChange,
-      classes = _ref.classes;
+      other = _objectWithoutProperties(_ref, ["variant", "items", "placeholder", "onChange"]);
+
   var items = itemsProp || [];
-  return React.createElement("div", {
+  return React.createElement("div", _extends({
     role: variant === 'landmark' ? 'search' : null
-  }, React.createElement(Downshift, {
+  }, other), React.createElement(Downshift, {
     itemToString: function itemToString(item) {
       return item ? item.value : '';
     },
@@ -35,7 +36,7 @@ var Search = function Search(_ref) {
         highlightedIndex = _ref2.highlightedIndex,
         selectedItem = _ref2.selectedItem;
     return React.createElement("div", {
-      className: clsx(classes.container, 'zep-search')
+      className: "zep-search"
     }, React.createElement("label", _extends({}, getLabelProps(), {
       className: "zep-visually-hidden"
     }), placeholder), React.createElement("input", _extends({}, getInputProps({
@@ -43,15 +44,15 @@ var Search = function Search(_ref) {
     }), {
       className: "zep-search__input"
     })), _ref3, isOpen ? React.createElement("ul", getMenuProps({
-      className: clsx('zep-select__list', classes.ul)
+      className: 'zep-select__list'
     }), items.filter(function (item) {
       return !inputValue || item.value.includes(inputValue);
     }).map(function (item, index) {
       return React.createElement("li", getItemProps({
         key: "searchItem".concat(index),
+        className: 'zep-select__listitem',
         index: index,
         item: item,
-        className: classes.li,
         style: {
           backgroundColor: highlightedIndex === index ? '#eceeef' : 'white',
           fontWeight: selectedItem === item ? 'bold' : 'normal'
@@ -62,7 +63,7 @@ var Search = function Search(_ref) {
 };
 
 process.env.NODE_ENV !== "production" ? Search.propTypes = {
-  classes: PropTypes.object.isRequired,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   variant: PropTypes.oneOf(['landmark']),
   items: PropTypes.array,
   placeholder: PropTypes.string.isRequired,

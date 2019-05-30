@@ -1,4 +1,6 @@
+import _extends from "@babel/runtime/helpers/extends";
 import _slicedToArray from "@babel/runtime/helpers/slicedToArray";
+import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -35,7 +37,9 @@ var Pagination = function Pagination(_ref) {
       pagesProp = _ref.pages,
       pagesToDisplayProp = _ref.pagesToDisplay,
       currentPage = _ref.currentPage,
-      onPageChange = _ref.onPageChange;
+      onPageChange = _ref.onPageChange,
+      other = _objectWithoutProperties(_ref, ["className", "pages", "pagesToDisplay", "currentPage", "onPageChange"]);
+
   var pages = Number(pagesProp);
   var pagesToDisplay = Number(pagesToDisplayProp) < pages ? Number(pagesToDisplayProp) : pages;
   var startDisplayPages = createArray(pagesToDisplay, 1); // changes the number of page buttons that are displayed
@@ -76,11 +80,11 @@ var Pagination = function Pagination(_ref) {
     setDisplayedPages(newDisplay);
   };
 
-  return React.createElement("div", {
+  return React.createElement("div", _extends({
     className: clsx('zep-pagination', classNameProp)
-  }, React.createElement(IconButton, {
+  }, other), React.createElement(IconButton, {
     onClick: function onClick() {
-      onPageChange(0);
+      onPageChange(1);
       setDisplayedPages(startDisplayPages);
     },
     disabled: currentPage === 1

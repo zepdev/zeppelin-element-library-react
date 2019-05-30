@@ -6,13 +6,15 @@ const RadioGroup = ({
   title,
   children,
   className: classNameProp,
-  classNameLegend
+  classNameLegend,
+  ...other
 }) => {
   return (
     <fieldset
       role="group"
       aria-labelledby={`radio_${title}`}
       className={clsx('zep-typo--normal-3', classNameProp)}
+      {...other}
     >
       <legend id={`radio_${title}`} className={classNameLegend}>
         {title}
@@ -23,9 +25,9 @@ const RadioGroup = ({
 };
 
 RadioGroup.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   className: PropTypes.string,
-  children: PropTypes.array,
+  children: PropTypes.array.isRequired,
   classNameLegend: PropTypes.string
 };
 

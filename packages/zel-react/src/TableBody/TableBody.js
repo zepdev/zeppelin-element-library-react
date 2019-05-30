@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function TableBody({ children, className: classNameProp }) {
-  return <tbody className={classNameProp}>{children}</tbody>;
+function TableBody({ children, className: classNameProp, ...other }) {
+  return (
+    <tbody className={classNameProp} {...other}>
+      {children}
+    </tbody>
+  );
 }
 
 TableBody.propTypes = {

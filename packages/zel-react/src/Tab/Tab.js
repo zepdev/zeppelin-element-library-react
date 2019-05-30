@@ -6,11 +6,11 @@ const Tab = ({
   className: classNameProp,
   label,
   size,
-  variant,
   onClick,
   icon,
   value,
-  selected
+  selected,
+  ...other
 }) => {
   const iconStyled = icon
     ? React.cloneElement(icon, {
@@ -19,7 +19,7 @@ const Tab = ({
     : null;
 
   return (
-    <div className="zep-tabs__item">
+    <div className="zep-tabs__item" {...other}>
       <button
         className={clsx('zep-tab', classNameProp, {
           'zep-tab--selected': selected,
@@ -40,12 +40,11 @@ const Tab = ({
 
 Tab.propTypes = {
   label: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['small']),
-  variant: PropTypes.oneOf(['icon']),
   onClick: PropTypes.func,
   icon: PropTypes.object,
   value: PropTypes.number,
-  selected: PropTypes.bool
+  selected: PropTypes.bool,
+  size: PropTypes.oneOf(['small'])
 };
 
 export default Tab;

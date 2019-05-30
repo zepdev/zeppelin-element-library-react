@@ -10,12 +10,12 @@ function TableCell(_ref) {
     component,
     className: classNameProp
   } = _ref,
-      props = _objectWithoutPropertiesLoose(_ref, ["children", "component", "className"]);
+      other = _objectWithoutPropertiesLoose(_ref, ["children", "component", "className"]);
 
   const Component = component || 'td';
   return React.createElement(Component, _extends({
     className: clsx('zep-table__cell', classNameProp)
-  }, props), children);
+  }, other), children);
 }
 
 process.env.NODE_ENV !== "production" ? TableCell.propTypes = {

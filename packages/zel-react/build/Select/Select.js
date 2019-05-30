@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -21,11 +23,15 @@ var _ref3 = _react.default.createElement(_ZepiconsNavigationDropdown.default, {
 
 var Select = function Select(_ref) {
   var itemsProp = _ref.items,
-      _onChange = _ref.onChange;
+      _onChange = _ref.onChange,
+      label = _ref.label,
+      placeholderProps = _ref.placeholder,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["items", "onChange", "label", "placeholder"]);
   var items = itemsProp || [];
+  var placeholder = placeholder || 'Select one';
   return _react.default.createElement(_downshift.default, {
     onChange: function onChange(selection) {
-      return _onChange(selection.value);
+      return _onChange(selection);
     },
     itemToString: function itemToString(item) {
       return item ? item.value : '';
@@ -42,7 +48,7 @@ var Select = function Select(_ref) {
     return _react.default.createElement("div", null, _react.default.createElement("label", getLabelProps({
       className: 'zep-select__label',
       htmlFor: 'zep-select'
-    }), "Form Label"), _react.default.createElement("button", {
+    }), label), _react.default.createElement("button", {
       id: "zep-select",
       type: "button",
       className: "zep-select__button",
@@ -50,30 +56,16 @@ var Select = function Select(_ref) {
       "data-toggle": "dropdown",
       "aria-haspopup": "true",
       "aria-expanded": isOpen
-    }, selectedItem ? selectedItem.value : 'Select an item', _ref3), isOpen ? _react.default.createElement("ul", getMenuProps({
+    }, selectedItem ? selectedItem.value : placeholder, _ref3), isOpen ? _react.default.createElement("ul", getMenuProps({
       className: 'zep-select__list'
-    }), items.filter(function (item) {
-      return !inputValue || item.value.includes(inputValue);
-    }).length === 0 ? _react.default.createElement("li", getItemProps({
-      item: {
-        value: 'no results'
-      },
-      index: 0,
-      className: 'zep-select__listitem',
-      style: {
-        backgroundColor: highlightedIndex === 0 ? 'lightgray' : 'white',
-        fontWeight: selectedItem === undefined ? 'bold' : 'normal'
-      }
-    }), "no results") : items.filter(function (item) {
-      return !inputValue || item.value.includes(inputValue);
-    }).map(function (item, index) {
+    }), items.map(function (item, index) {
       return _react.default.createElement("li", getItemProps({
         key: "listItem".concat(index),
         index: index,
         item: item,
         className: 'zep-select__listitem',
         style: {
-          backgroundColor: highlightedIndex === index ? 'lightgray' : 'white',
+          backgroundColor: highlightedIndex === index ? '#eceeef' : 'white',
           fontWeight: selectedItem === item ? 'bold' : 'normal'
         }
       }), item.value);
@@ -83,7 +75,9 @@ var Select = function Select(_ref) {
 
 process.env.NODE_ENV !== "production" ? Select.propTypes = {
   onChange: _propTypes.default.func,
-  items: _propTypes.default.array.isRequired
+  items: _propTypes.default.array.isRequired,
+  label: _propTypes.default.string.isRequired,
+  placeholder: _propTypes.default.string
 } : void 0;
 var _default = Select;
 exports.default = _default;

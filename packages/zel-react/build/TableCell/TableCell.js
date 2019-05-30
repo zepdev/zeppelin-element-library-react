@@ -21,11 +21,11 @@ function TableCell(_ref) {
   var children = _ref.children,
       component = _ref.component,
       classNameProp = _ref.className,
-      props = (0, _objectWithoutProperties2.default)(_ref, ["children", "component", "className"]);
+      other = (0, _objectWithoutProperties2.default)(_ref, ["children", "component", "className"]);
   var Component = component || 'td';
   return _react.default.createElement(Component, (0, _extends2.default)({
     className: (0, _clsx.default)('zep-table__cell', classNameProp)
-  }, props), children);
+  }, other), children);
 }
 
 process.env.NODE_ENV !== "production" ? TableCell.propTypes = {

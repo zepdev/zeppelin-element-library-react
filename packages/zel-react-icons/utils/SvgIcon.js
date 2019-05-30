@@ -15,10 +15,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _clsx = _interopRequireDefault(require("clsx"));
-
-require("./zepicons.css");
-
 var SvgIcon = _react.default.forwardRef(function SvgIcon(props, ref) {
   var children = props.children,
       className = props.className,
@@ -34,7 +30,7 @@ var SvgIcon = _react.default.forwardRef(function SvgIcon(props, ref) {
       viewBox = _props$viewBox === void 0 ? '0 0 32 32' : _props$viewBox,
       other = (0, _objectWithoutProperties2.default)(props, ["children", "className", "color", "component", "fontSize", "htmlColor", "titleAccess", "viewBox"]);
   return _react.default.createElement(Component, (0, _extends2.default)({
-    className: (0, _clsx.default)(className, 'zepicons'),
+    className: className,
     focusable: "false",
     viewBox: viewBox,
     color: htmlColor,

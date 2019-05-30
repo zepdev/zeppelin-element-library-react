@@ -7,6 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -21,10 +25,11 @@ var Input = function Input(_ref) {
       errorMessage = _ref.errorMessage,
       id = _ref.id,
       label = _ref.label,
-      placeholder = _ref.placeholder;
-  return _react.default.createElement("div", {
+      placeholder = _ref.placeholder,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["className", "value", "onChange", "error", "errorMessage", "id", "label", "placeholder"]);
+  return _react.default.createElement("div", (0, _extends2.default)({
     className: (0, _clsx.default)('zep-input-container', error && 'zep-input-container--error')
-  }, _react.default.createElement("input", {
+  }, other), _react.default.createElement("input", {
     type: "text",
     className: (0, _clsx.default)(classNameProp, 'zep-input'),
     placeholder: placeholder,
@@ -46,7 +51,9 @@ process.env.NODE_ENV !== "production" ? Input.propTypes = {
   onChange: _propTypes.default.func,
   label: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.array, _propTypes.default.object]),
   id: _propTypes.default.string.isRequired,
-  placeholder: _propTypes.default.string
+  placeholder: _propTypes.default.string,
+  error: _propTypes.default.bool,
+  errorMessage: _propTypes.default.string
 } : void 0;
 var _default = Input;
 exports.default = _default;

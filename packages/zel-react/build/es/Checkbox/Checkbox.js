@@ -1,15 +1,20 @@
+import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Checkbox = ({
-  label,
-  disabled,
-  isChecked,
-  handleChange
-}) => {
-  return React.createElement("div", {
+const Checkbox = (_ref) => {
+  let {
+    label,
+    disabled,
+    isChecked,
+    handleChange
+  } = _ref,
+      other = _objectWithoutPropertiesLoose(_ref, ["label", "disabled", "isChecked", "handleChange"]);
+
+  return React.createElement("div", _extends({
     className: "zep-checkbox"
-  }, React.createElement("input", {
+  }, other), React.createElement("input", {
     className: "zep-checkbox__input",
     type: "checkbox",
     id: `checkbox_${label}`,

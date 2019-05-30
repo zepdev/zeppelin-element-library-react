@@ -1,3 +1,5 @@
+import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '../IconButton/IconButton';
@@ -13,7 +15,8 @@ function NumberInput(_ref) {
       count = _ref.count,
       onChange = _ref.onChange,
       onPlus = _ref.onPlus,
-      onMinus = _ref.onMinus;
+      onMinus = _ref.onMinus,
+      other = _objectWithoutProperties(_ref, ["label", "count", "onChange", "onPlus", "onMinus"]);
 
   var handleChange = function handleChange(event) {
     var value = parseInt(event.target.value, 10);
@@ -21,9 +24,9 @@ function NumberInput(_ref) {
     onChange(count);
   };
 
-  return React.createElement("div", {
+  return React.createElement("div", _extends({
     className: "zep-numberinput"
-  }, React.createElement(IconButton, {
+  }, other), React.createElement(IconButton, {
     onClick: onMinus
   }, _ref2), React.createElement("label", {
     className: "zep-visually-hidden",
@@ -44,6 +47,6 @@ process.env.NODE_ENV !== "production" ? NumberInput.propTypes = {
   onPlus: PropTypes.func.isRequired,
   onMinus: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  count: PropTypes.number.isRequired
+  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 } : void 0;
 export default NumberInput;

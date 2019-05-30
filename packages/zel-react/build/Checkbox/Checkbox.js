@@ -7,6 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -15,10 +19,11 @@ var Checkbox = function Checkbox(_ref) {
   var label = _ref.label,
       disabled = _ref.disabled,
       isChecked = _ref.isChecked,
-      handleChange = _ref.handleChange;
-  return _react.default.createElement("div", {
+      handleChange = _ref.handleChange,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["label", "disabled", "isChecked", "handleChange"]);
+  return _react.default.createElement("div", (0, _extends2.default)({
     className: "zep-checkbox"
-  }, _react.default.createElement("input", {
+  }, other), _react.default.createElement("input", {
     className: "zep-checkbox__input",
     type: "checkbox",
     id: "checkbox_".concat(label),

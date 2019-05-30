@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-function GridContainer({ className: classNameProp, children }) {
-  return <div className={clsx('zep-grid', classNameProp)}>{children}</div>;
+function GridContainer({ className: classNameProp, children, ...other }) {
+  return (
+    <div className={clsx('zep-grid', classNameProp)} {...other}>
+      {children}
+    </div>
+  );
 }
 
 GridContainer.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+  className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  children: PropTypes.any.isRequired
 };
 
 export default GridContainer;

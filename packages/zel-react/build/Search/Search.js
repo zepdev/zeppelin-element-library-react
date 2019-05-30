@@ -9,11 +9,11 @@ exports.default = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var _clsx = _interopRequireDefault(require("clsx"));
 
 var _downshift = _interopRequireDefault(require("downshift"));
 
@@ -28,11 +28,11 @@ var Search = function Search(_ref) {
       itemsProp = _ref.items,
       placeholder = _ref.placeholder,
       _onChange = _ref.onChange,
-      classes = _ref.classes;
+      other = (0, _objectWithoutProperties2.default)(_ref, ["variant", "items", "placeholder", "onChange"]);
   var items = itemsProp || [];
-  return _react.default.createElement("div", {
+  return _react.default.createElement("div", (0, _extends2.default)({
     role: variant === 'landmark' ? 'search' : null
-  }, _react.default.createElement(_downshift.default, {
+  }, other), _react.default.createElement(_downshift.default, {
     itemToString: function itemToString(item) {
       return item ? item.value : '';
     },
@@ -49,7 +49,7 @@ var Search = function Search(_ref) {
         highlightedIndex = _ref2.highlightedIndex,
         selectedItem = _ref2.selectedItem;
     return _react.default.createElement("div", {
-      className: (0, _clsx.default)(classes.container, 'zep-search')
+      className: "zep-search"
     }, _react.default.createElement("label", (0, _extends2.default)({}, getLabelProps(), {
       className: "zep-visually-hidden"
     }), placeholder), _react.default.createElement("input", (0, _extends2.default)({}, getInputProps({
@@ -57,15 +57,15 @@ var Search = function Search(_ref) {
     }), {
       className: "zep-search__input"
     })), _ref3, isOpen ? _react.default.createElement("ul", getMenuProps({
-      className: (0, _clsx.default)('zep-select__list', classes.ul)
+      className: 'zep-select__list'
     }), items.filter(function (item) {
       return !inputValue || item.value.includes(inputValue);
     }).map(function (item, index) {
       return _react.default.createElement("li", getItemProps({
         key: "searchItem".concat(index),
+        className: 'zep-select__listitem',
         index: index,
         item: item,
-        className: classes.li,
         style: {
           backgroundColor: highlightedIndex === index ? '#eceeef' : 'white',
           fontWeight: selectedItem === item ? 'bold' : 'normal'
@@ -76,7 +76,7 @@ var Search = function Search(_ref) {
 };
 
 process.env.NODE_ENV !== "production" ? Search.propTypes = {
-  classes: _propTypes.default.object.isRequired,
+  className: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]),
   variant: _propTypes.default.oneOf(['landmark']),
   items: _propTypes.default.array,
   placeholder: _propTypes.default.string.isRequired,

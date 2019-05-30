@@ -7,6 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -16,10 +20,11 @@ var _clsx = _interopRequireDefault(require("clsx"));
 function Table(_ref) {
   var children = _ref.children,
       title = _ref.title,
-      classNameProp = _ref.className;
-  return _react.default.createElement("table", {
+      classNameProp = _ref.className,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["children", "title", "className"]);
+  return _react.default.createElement("table", (0, _extends2.default)({
     className: (0, _clsx.default)('zep-table', classNameProp)
-  }, _react.default.createElement("caption", {
+  }, other), _react.default.createElement("caption", {
     className: "zep-visually-hidden"
   }, title), children);
 }

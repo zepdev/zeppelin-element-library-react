@@ -1,14 +1,20 @@
+import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const Tabs = ({
-  className: classNameProp,
-  children: childrenProp,
-  onClick,
-  ariaLabel,
-  value
-}) => {
+const Tabs = (_ref) => {
+  let {
+    className: classNameProp,
+    children: childrenProp,
+    onClick,
+    ariaLabel,
+    value,
+    size
+  } = _ref,
+      other = _objectWithoutPropertiesLoose(_ref, ["className", "children", "onClick", "ariaLabel", "value", "size"]);
+
   const valueToIndex = new Map();
   let childIndex = 0;
   const children = React.Children.map(childrenProp, child => {
@@ -23,21 +29,24 @@ const Tabs = ({
     return React.cloneElement(child, {
       selected,
       onClick,
+      size,
       value: childValue
     });
   });
-  return React.createElement("div", {
+  return React.createElement("div", _extends({
     className: classnames(classNameProp, 'zep-tabs'),
     "data-testid": "tabs",
     role: "tablist",
     "aria-label": ariaLabel
-  }, children);
+  }, other), children);
 };
 
 process.env.NODE_ENV !== "production" ? Tabs.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   children: PropTypes.array.isRequired,
   onClick: PropTypes.func,
   value: PropTypes.number,
-  ariaLabel: PropTypes.string
+  ariaLabel: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['small', 'large'])
 } : void 0;
 export default Tabs;

@@ -1,3 +1,5 @@
+import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -7,7 +9,10 @@ var Tabs = function Tabs(_ref) {
       childrenProp = _ref.children,
       onClick = _ref.onClick,
       ariaLabel = _ref.ariaLabel,
-      value = _ref.value;
+      value = _ref.value,
+      size = _ref.size,
+      other = _objectWithoutProperties(_ref, ["className", "children", "onClick", "ariaLabel", "value", "size"]);
+
   var valueToIndex = new Map();
   var childIndex = 0;
   var children = React.Children.map(childrenProp, function (child) {
@@ -22,21 +27,24 @@ var Tabs = function Tabs(_ref) {
     return React.cloneElement(child, {
       selected: selected,
       onClick: onClick,
+      size: size,
       value: childValue
     });
   });
-  return React.createElement("div", {
+  return React.createElement("div", _extends({
     className: classnames(classNameProp, 'zep-tabs'),
     "data-testid": "tabs",
     role: "tablist",
     "aria-label": ariaLabel
-  }, children);
+  }, other), children);
 };
 
 process.env.NODE_ENV !== "production" ? Tabs.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   children: PropTypes.array.isRequired,
   onClick: PropTypes.func,
   value: PropTypes.number,
-  ariaLabel: PropTypes.string
+  ariaLabel: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['small', 'large'])
 } : void 0;
 export default Tabs;

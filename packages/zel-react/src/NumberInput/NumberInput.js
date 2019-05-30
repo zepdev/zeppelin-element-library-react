@@ -4,7 +4,7 @@ import IconButton from '../IconButton/IconButton';
 import ZepcionsMinus from '@zlab-de/zel-react-icons/ZepiconsMinus';
 import ZepiconsPlus from '@zlab-de/zel-react-icons/ZepiconsPlus';
 
-function NumberInput({ label, count, onChange, onPlus, onMinus }) {
+function NumberInput({ label, count, onChange, onPlus, onMinus, ...other }) {
   const handleChange = event => {
     let value = parseInt(event.target.value, 10);
     let count = isNaN(value) ? 0 : value;
@@ -12,7 +12,7 @@ function NumberInput({ label, count, onChange, onPlus, onMinus }) {
   };
 
   return (
-    <div className="zep-numberinput">
+    <div className="zep-numberinput" {...other}>
       <IconButton onClick={onMinus}>
         <ZepcionsMinus />
       </IconButton>
@@ -38,7 +38,7 @@ NumberInput.propTypes = {
   onPlus: PropTypes.func.isRequired,
   onMinus: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  count: PropTypes.number.isRequired
+  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
 
 export default NumberInput;

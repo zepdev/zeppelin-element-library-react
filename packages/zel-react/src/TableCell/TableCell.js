@@ -6,11 +6,11 @@ function TableCell({
   children,
   component,
   className: classNameProp,
-  ...props
+  ...other
 }) {
   const Component = component || 'td';
   return (
-    <Component className={clsx('zep-table__cell', classNameProp)} {...props}>
+    <Component className={clsx('zep-table__cell', classNameProp)} {...other}>
       {children}
     </Component>
   );

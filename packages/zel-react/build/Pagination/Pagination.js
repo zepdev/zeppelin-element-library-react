@@ -9,7 +9,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -54,7 +58,8 @@ var Pagination = function Pagination(_ref) {
       pagesProp = _ref.pages,
       pagesToDisplayProp = _ref.pagesToDisplay,
       currentPage = _ref.currentPage,
-      onPageChange = _ref.onPageChange;
+      onPageChange = _ref.onPageChange,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["className", "pages", "pagesToDisplay", "currentPage", "onPageChange"]);
   var pages = Number(pagesProp);
   var pagesToDisplay = Number(pagesToDisplayProp) < pages ? Number(pagesToDisplayProp) : pages;
   var startDisplayPages = createArray(pagesToDisplay, 1); // changes the number of page buttons that are displayed
@@ -95,11 +100,11 @@ var Pagination = function Pagination(_ref) {
     setDisplayedPages(newDisplay);
   };
 
-  return _react.default.createElement("div", {
+  return _react.default.createElement("div", (0, _extends2.default)({
     className: (0, _clsx.default)('zep-pagination', classNameProp)
-  }, _react.default.createElement(_IconButton.default, {
+  }, other), _react.default.createElement(_IconButton.default, {
     onClick: function onClick() {
-      onPageChange(0);
+      onPageChange(1);
       setDisplayedPages(startDisplayPages);
     },
     disabled: currentPage === 1

@@ -10,7 +10,7 @@ function Button({
   disabled,
   fullWidth,
   size,
-  ...props
+  ...other
 }) {
   const className = clsx(
     'zep-button',
@@ -45,7 +45,7 @@ function Button({
       className={className}
       disabled={disabled}
       onClick={disabled ? null : onClick}
-      {...props}
+      {...other}
     >
       {variant === 'tertiary' && childrenIconTertiary}
       <span

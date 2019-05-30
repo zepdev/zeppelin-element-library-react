@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-function TableHeader({ children: childrenProp, className: classNameProp }) {
+function TableHeader({
+  children: childrenProp,
+  className: classNameProp,
+  ...other
+}) {
   const children = React.Children.map(childrenProp, child => {
     if (!React.isValidElement(child)) {
       return null;
@@ -14,7 +18,7 @@ function TableHeader({ children: childrenProp, className: classNameProp }) {
     });
   });
   return (
-    <thead>
+    <thead {...other}>
       <tr
         className={clsx('zep-table__row zep-table__row--header', classNameProp)}
       >
@@ -30,7 +34,7 @@ TableHeader.propTypes = {
     PropTypes.array,
     PropTypes.object
   ]),
-  className: PropTypes.string
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };
 
 export default TableHeader;
