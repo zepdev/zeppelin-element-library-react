@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -15,7 +17,8 @@ var _clsx = _interopRequireDefault(require("clsx"));
 
 function TableHeader(_ref) {
   var childrenProp = _ref.children,
-      classNameProp = _ref.className;
+      classNameProp = _ref.className,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["children", "className"]);
 
   var children = _react.default.Children.map(childrenProp, function (child) {
     if (!_react.default.isValidElement(child)) {
@@ -29,14 +32,14 @@ function TableHeader(_ref) {
     });
   });
 
-  return _react.default.createElement("thead", null, _react.default.createElement("tr", {
+  return _react.default.createElement("thead", other, _react.default.createElement("tr", {
     className: (0, _clsx.default)('zep-table__row zep-table__row--header', classNameProp)
   }, children));
 }
 
 process.env.NODE_ENV !== "production" ? TableHeader.propTypes = {
   children: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.array, _propTypes.default.object]),
-  className: _propTypes.default.string
+  className: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object])
 } : void 0;
 var _default = TableHeader;
 exports.default = _default;

@@ -2,8 +2,6 @@ import _extends from "@babel/runtime/helpers/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import './zepicons.css';
 var SvgIcon = React.forwardRef(function SvgIcon(props, ref) {
   var children = props.children,
       className = props.className,
@@ -20,7 +18,7 @@ var SvgIcon = React.forwardRef(function SvgIcon(props, ref) {
       other = _objectWithoutProperties(props, ["children", "className", "color", "component", "fontSize", "htmlColor", "titleAccess", "viewBox"]);
 
   return React.createElement(Component, _extends({
-    className: clsx(className, 'zepicons'),
+    className: className,
     focusable: "false",
     viewBox: viewBox,
     color: htmlColor,

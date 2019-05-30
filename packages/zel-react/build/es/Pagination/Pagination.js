@@ -1,3 +1,5 @@
+import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -11,29 +13,32 @@ function createArray(length, start) {
   return length ? Array.from(Array(Number(length)), (x, i) => start + i) : [];
 }
 
-var _ref = React.createElement(ZepiconsPreviousPage, {
+var _ref2 = React.createElement(ZepiconsPreviousPage, {
   className: "zep-button__icon"
 });
 
-var _ref2 = React.createElement(ZepiconsChevronLeft, {
+var _ref3 = React.createElement(ZepiconsChevronLeft, {
   className: "zep-button__icon"
 });
 
-var _ref3 = React.createElement(ZepiconsChevronRight, {
+var _ref4 = React.createElement(ZepiconsChevronRight, {
   className: "zep-button__icon"
 });
 
-var _ref4 = React.createElement(ZepiconsNextPage, {
+var _ref5 = React.createElement(ZepiconsNextPage, {
   className: "zep-button__icon"
 });
 
-const Pagination = ({
-  className: classNameProp,
-  pages: pagesProp,
-  pagesToDisplay: pagesToDisplayProp,
-  currentPage,
-  onPageChange
-}) => {
+const Pagination = (_ref) => {
+  let {
+    className: classNameProp,
+    pages: pagesProp,
+    pagesToDisplay: pagesToDisplayProp,
+    currentPage,
+    onPageChange
+  } = _ref,
+      other = _objectWithoutPropertiesLoose(_ref, ["className", "pages", "pagesToDisplay", "currentPage", "onPageChange"]);
+
   const pages = Number(pagesProp);
   const pagesToDisplay = Number(pagesToDisplayProp) < pages ? Number(pagesToDisplayProp) : pages;
   const startDisplayPages = createArray(pagesToDisplay, 1); // changes the number of page buttons that are displayed
@@ -71,28 +76,28 @@ const Pagination = ({
     setDisplayedPages(newDisplay);
   };
 
-  return React.createElement("div", {
+  return React.createElement("div", _extends({
     className: clsx('zep-pagination', classNameProp)
-  }, React.createElement(IconButton, {
+  }, other), React.createElement(IconButton, {
     onClick: () => {
-      onPageChange(0);
+      onPageChange(1);
       setDisplayedPages(startDisplayPages);
     },
     disabled: currentPage === 1
-  }, _ref), React.createElement(IconButton, {
+  }, _ref2), React.createElement(IconButton, {
     onClick: handleBackOnePage,
     disabled: currentPage === 1
-  }, _ref2), displayedPages.map(elem => React.createElement("button", {
+  }, _ref3), displayedPages.map(elem => React.createElement("button", {
     key: `pagination${elem}`,
     className: clsx('zep-button zep-button-pagination', currentPage === elem && 'zep-pagination--selected'),
     onClick: () => onPageChange(elem)
   }, elem)), React.createElement(IconButton, {
     onClick: handleNextOnePage,
     disabled: currentPage === pages
-  }, _ref3), React.createElement(IconButton, {
+  }, _ref4), React.createElement(IconButton, {
     onClick: handleEndPage,
     disabled: currentPage === pages
-  }, _ref4));
+  }, _ref5));
 };
 
 process.env.NODE_ENV !== "production" ? Pagination.propTypes = {

@@ -14,7 +14,7 @@ function Button(_ref) {
     fullWidth,
     size
   } = _ref,
-      props = _objectWithoutPropertiesLoose(_ref, ["children", "className", "onClick", "variant", "disabled", "fullWidth", "size"]);
+      other = _objectWithoutPropertiesLoose(_ref, ["children", "className", "onClick", "variant", "disabled", "fullWidth", "size"]);
 
   const className = clsx('zep-button', variant === 'primary' && 'zep-button-primary', variant === 'secondary' && 'zep-button-secondary', variant === 'tertiary' && 'zep-button-tertiary', fullWidth && 'zep-button--full', size === 'small' && 'zep-button--small', classNameProp);
   const isString = typeof childrenProp === 'string';
@@ -27,7 +27,7 @@ function Button(_ref) {
     className: className,
     disabled: disabled,
     onClick: disabled ? null : onClick
-  }, props), variant === 'tertiary' && childrenIconTertiary, React.createElement("span", {
+  }, other), variant === 'tertiary' && childrenIconTertiary, React.createElement("span", {
     className: clsx('zep-button__text', variant === 'tertiary' && 'zep-button__text--tertiary')
   }, childrenText));
 }

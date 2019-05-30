@@ -16,7 +16,8 @@ const Pagination = ({
   pages: pagesProp,
   pagesToDisplay: pagesToDisplayProp,
   currentPage,
-  onPageChange
+  onPageChange,
+  ...other
 }) => {
   const pages = Number(pagesProp);
   const pagesToDisplay =
@@ -58,10 +59,10 @@ const Pagination = ({
   };
 
   return (
-    <div className={clsx('zep-pagination', classNameProp)}>
+    <div className={clsx('zep-pagination', classNameProp)} {...other}>
       <IconButton
         onClick={() => {
-          onPageChange(0);
+          onPageChange(1);
           setDisplayedPages(startDisplayPages);
         }}
         disabled={currentPage === 1}

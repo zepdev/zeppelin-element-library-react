@@ -7,6 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -23,10 +27,11 @@ var Radio = function Radio(_ref) {
       value = _ref.value,
       name = _ref.name,
       label = _ref.label,
-      classNameProp = _ref.className;
-  return _react.default.createElement("label", {
+      classNameProp = _ref.className,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["checked", "onChange", "value", "name", "label", "className"]);
+  return _react.default.createElement("label", (0, _extends2.default)({
     className: (0, _clsx.default)('zep-radio', classNameProp)
-  }, _react.default.createElement("input", {
+  }, other), _react.default.createElement("input", {
     type: "radio",
     name: name,
     className: "zep-radio__input",
@@ -42,9 +47,9 @@ process.env.NODE_ENV !== "production" ? Radio.propTypes = {
   className: _propTypes.default.string,
   checked: _propTypes.default.bool.isRequired,
   onChange: _propTypes.default.func.isRequired,
-  value: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  value: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]).isRequired,
   label: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
-  name: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number])
+  name: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]).isRequired
 } : void 0;
 var _default = Radio;
 exports.default = _default;

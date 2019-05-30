@@ -8,10 +8,11 @@ const Radio = ({
   value,
   name,
   label,
-  className: classNameProp
+  className: classNameProp,
+  ...other
 }) => {
   return (
-    <label className={clsx('zep-radio', classNameProp)}>
+    <label className={clsx('zep-radio', classNameProp)} {...other}>
       <input
         type="radio"
         name={name}
@@ -30,9 +31,9 @@ Radio.propTypes = {
   className: PropTypes.string,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
 
 export default Radio;

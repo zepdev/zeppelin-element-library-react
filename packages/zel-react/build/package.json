@@ -1,6 +1,6 @@
 {
   "name": "@zlab-de/zel-react",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": false,
   "author": "ZLab",
   "repository": {
@@ -32,7 +32,7 @@
     "react-dom": "^16.8.0"
   },
   "dependencies": {
-    "@zlab-de/zel-react-icons": "^0.1.0",
+    "@zlab-de/zel-react-icons": "^0.1.1",
     "clsx": "^1.0.4",
     "downshift": "^3.2.10",
     "zeppelin-element-library": "^0.10.12"

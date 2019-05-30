@@ -1,12 +1,16 @@
+import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import PropTypes from 'prop-types';
 
 function TableBody(_ref) {
   var children = _ref.children,
-      classNameProp = _ref.className;
-  return React.createElement("tbody", {
+      classNameProp = _ref.className,
+      other = _objectWithoutProperties(_ref, ["children", "className"]);
+
+  return React.createElement("tbody", _extends({
     className: classNameProp
-  }, children);
+  }, other), children);
 }
 
 process.env.NODE_ENV !== "production" ? TableBody.propTypes = {

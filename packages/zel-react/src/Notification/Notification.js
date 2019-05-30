@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-const Notification = ({ className: classNameProp, children }) => {
+const Notification = ({
+  className: classNameProp,
+  children,
+  variant,
+  ...other
+}) => {
   return (
     <div
       className={clsx(
@@ -12,6 +17,7 @@ const Notification = ({ className: classNameProp, children }) => {
         },
         classNameProp
       )}
+      {...other}
     >
       {children}
     </div>
@@ -19,8 +25,8 @@ const Notification = ({ className: classNameProp, children }) => {
 };
 
 Notification.propTypes = {
-  className: PropTypes.object,
-  children: PropTypes.array,
+  className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.string]).isRequired,
   variant: PropTypes.oneOf(['success', 'info', 'warning', 'danger'])
 };
 

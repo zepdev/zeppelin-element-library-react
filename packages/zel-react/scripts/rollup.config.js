@@ -64,7 +64,8 @@ export default [
           'src/zeppelin-element-library.css',
           'src/theme.json',
           'package.json',
-          'README.md'
+          'README.md',
+          'LICENSE'
         ],
         outputFolder: 'build'
       }),
@@ -94,7 +95,8 @@ export default [
           'src/zeppelin-element-library.css',
           'src/theme.json',
           'package.json',
-          'README.md'
+          'README.md',
+          'LICENSE'
         ],
         outputFolder: 'build'
       }),

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-function GridRow({ children, className: classNameProp, align }) {
+function GridRow({ children, className: classNameProp, align, ...other }) {
   const className = clsx(
     'zep-grid__row',
     {
@@ -11,7 +11,11 @@ function GridRow({ children, className: classNameProp, align }) {
     classNameProp
   );
 
-  return <div className={className}>{children}</div>;
+  return (
+    <div className={className} {...other}>
+      {children}
+    </div>
+  );
 }
 
 GridRow.propTypes = {

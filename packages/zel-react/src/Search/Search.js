@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import Downshift from 'downshift';
 import ZepiconsSearch from '@zlab-de/zel-react-icons/ZepiconsSearch';
 
@@ -9,11 +8,11 @@ const Search = ({
   items: itemsProp,
   placeholder,
   onChange,
-  classes
+  ...other
 }) => {
   const items = itemsProp || [];
   return (
-    <div role={variant === 'landmark' ? 'search' : null}>
+    <div role={variant === 'landmark' ? 'search' : null} {...other}>
       <Downshift
         itemToString={item => (item ? item.value : '')}
         onChange={selection => onChange(selection)}
@@ -28,7 +27,7 @@ const Search = ({
           highlightedIndex,
           selectedItem
         }) => (
-          <div className={clsx(classes.container, 'zep-search')}>
+          <div className="zep-search">
             <label {...getLabelProps()} className="zep-visually-hidden">
               {placeholder}
             </label>
@@ -38,11 +37,7 @@ const Search = ({
             />
             <ZepiconsSearch className="zep-search__icon" />
             {isOpen ? (
-              <ul
-                {...getMenuProps({
-                  className: clsx('zep-select__list', classes.ul)
-                })}
-              >
+              <ul {...getMenuProps({ className: 'zep-select__list' })}>
                 {items
                   .filter(
                     item => !inputValue || item.value.includes(inputValue)
@@ -51,9 +46,9 @@ const Search = ({
                     <li
                       {...getItemProps({
                         key: `searchItem${index}`,
+                        className: 'zep-select__listitem',
                         index,
                         item,
-                        className: classes.li,
                         style: {
                           backgroundColor:
                             highlightedIndex === index ? '#eceeef' : 'white',
@@ -74,7 +69,7 @@ const Search = ({
 };
 
 Search.propTypes = {
-  classes: PropTypes.object.isRequired,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   variant: PropTypes.oneOf(['landmark']),
   items: PropTypes.array,
   placeholder: PropTypes.string.isRequired,

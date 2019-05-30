@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 import Downshift from 'downshift';
 import ZepiconsNavigationDropdown from '@zlab-de/zel-react-icons/ZepiconsNavigationDropdown';
 
-const Select = ({ items: itemsProp, onChange }) => {
+const Select = ({
+  items: itemsProp,
+  onChange,
+  label,
+  placeholder: placeholderProps,
+  ...other
+}) => {
   const items = itemsProp || [];
+  const placeholder = placeholder || 'Select one';
   return (
     <Downshift
-      onChange={selection => onChange(selection.value)}
+      onChange={selection => onChange(selection)}
       itemToString={item => (item ? item.value : '')}
     >
       {({
@@ -27,7 +34,7 @@ const Select = ({ items: itemsProp, onChange }) => {
               htmlFor: 'zep-select'
             })}
           >
-            Form Label
+            {label}
           </label>
           <button
             id="zep-select"
@@ -38,51 +45,28 @@ const Select = ({ items: itemsProp, onChange }) => {
             aria-haspopup="true"
             aria-expanded={isOpen}
           >
-            {selectedItem ? selectedItem.value : 'Select an item'}
+            {selectedItem ? selectedItem.value : placeholder}
             <ZepiconsNavigationDropdown className="zep-select__icon" />
           </button>
           {isOpen ? (
             <ul {...getMenuProps({ className: 'zep-select__list' })}>
-              {items.filter(
-                item => !inputValue || item.value.includes(inputValue)
-              ).length === 0 ? (
+              {items.map((item, index) => (
                 <li
                   {...getItemProps({
-                    item: { value: 'no results' },
-                    index: 0,
+                    key: `listItem${index}`,
+                    index,
+                    item,
                     className: 'zep-select__listitem',
                     style: {
                       backgroundColor:
-                        highlightedIndex === 0 ? 'lightgray' : 'white',
-                      fontWeight: selectedItem === undefined ? 'bold' : 'normal'
+                        highlightedIndex === index ? '#eceeef' : 'white',
+                      fontWeight: selectedItem === item ? 'bold' : 'normal'
                     }
                   })}
                 >
-                  no results
+                  {item.value}
                 </li>
-              ) : (
-                items
-                  .filter(
-                    item => !inputValue || item.value.includes(inputValue)
-                  )
-                  .map((item, index) => (
-                    <li
-                      {...getItemProps({
-                        key: `listItem${index}`,
-                        index,
-                        item,
-                        className: 'zep-select__listitem',
-                        style: {
-                          backgroundColor:
-                            highlightedIndex === index ? 'lightgray' : 'white',
-                          fontWeight: selectedItem === item ? 'bold' : 'normal'
-                        }
-                      })}
-                    >
-                      {item.value}
-                    </li>
-                  ))
-              )}
+              ))}
             </ul>
           ) : null}
         </div>
@@ -93,6 +77,9 @@ const Select = ({ items: itemsProp, onChange }) => {
 
 Select.propTypes = {
   onChange: PropTypes.func,
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string
 };
+
 export default Select;

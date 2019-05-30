@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-function TableRow({ children, color, className: classNameProp }) {
+function TableRow({ children, color, className: classNameProp, ...other }) {
   const className = clsx(
     'zep-table__row',
     {
@@ -12,7 +12,11 @@ function TableRow({ children, color, className: classNameProp }) {
     classNameProp
   );
 
-  return <tr className={className}>{children}</tr>;
+  return (
+    <tr className={className} {...other}>
+      {children}
+    </tr>
+  );
 }
 
 TableRow.propTypes = {
@@ -21,7 +25,8 @@ TableRow.propTypes = {
     PropTypes.array,
     PropTypes.object
   ]),
-  color: PropTypes.oneOf(['white', 'gray'])
+  color: PropTypes.oneOf(['white', 'gray']),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 };
 
 TableRow.defaultProps = {

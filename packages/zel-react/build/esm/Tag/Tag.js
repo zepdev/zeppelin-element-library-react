@@ -1,19 +1,23 @@
+import _extends from "@babel/runtime/helpers/extends";
+import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import ZepiconsClose from '@zlab-de/zel-react-icons/ZepiconsClose';
 
 var _ref2 = React.createElement(ZepiconsClose, {
-  className: "zep-tag__icons"
+  className: "zep-tag__icon"
 });
 
 var Tag = function Tag(_ref) {
   var classNameProp = _ref.className,
       children = _ref.children,
-      onClose = _ref.onClose;
-  return React.createElement("span", {
+      onClose = _ref.onClose,
+      other = _objectWithoutProperties(_ref, ["className", "children", "onClose"]);
+
+  return React.createElement("span", _extends({
     className: clsx(classNameProp, 'zep-tag')
-  }, children, React.createElement("button", {
+  }, other), children, React.createElement("button", {
     onClose: onClose,
     "aria-label": "close",
     className: "zep-tag__button"

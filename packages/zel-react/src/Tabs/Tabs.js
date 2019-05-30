@@ -7,7 +7,9 @@ const Tabs = ({
   children: childrenProp,
   onClick,
   ariaLabel,
-  value
+  value,
+  size,
+  ...other
 }) => {
   const valueToIndex = new Map();
   let childIndex = 0;
@@ -24,6 +26,7 @@ const Tabs = ({
     return React.cloneElement(child, {
       selected,
       onClick,
+      size,
       value: childValue
     });
   });
@@ -34,6 +37,7 @@ const Tabs = ({
       data-testid="tabs"
       role="tablist"
       aria-label={ariaLabel}
+      {...other}
     >
       {children}
     </div>
@@ -41,10 +45,12 @@ const Tabs = ({
 };
 
 Tabs.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   children: PropTypes.array.isRequired,
   onClick: PropTypes.func,
   value: PropTypes.number,
-  ariaLabel: PropTypes.string
+  ariaLabel: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['small', 'large'])
 };
 
 export default Tabs;

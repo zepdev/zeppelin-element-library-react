@@ -10,13 +10,15 @@ const Input = ({
   errorMessage,
   id,
   label,
-  placeholder
+  placeholder,
+  ...other
 }) => {
   return (
     <div
       className={clsx('zep-input-container', {
         'zep-input-container--error': error
       })}
+      {...other}
     >
       <input
         type="text"
@@ -48,7 +50,9 @@ Input.propTypes = {
     PropTypes.object
   ]),
   id: PropTypes.string.isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string
 };
 
 export default Input;

@@ -5,7 +5,8 @@ import clsx from 'clsx';
 const List = ({
   variant: variantProp,
   className: classNameProp,
-  children: childrenProp
+  children: childrenProp,
+  ...other
 }) => {
   const variant = variantProp || 'bullet';
   const children = React.Children.map(childrenProp, child => {
@@ -14,12 +15,16 @@ const List = ({
     });
   });
 
-  return <ul className={clsx('zep-list', classNameProp)}>{children}</ul>;
+  return (
+    <ul className={clsx('zep-list', classNameProp)} {...other}>
+      {children}
+    </ul>
+  );
 };
 
 List.propTypes = {
   className: PropTypes.object,
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   variant: PropTypes.oneOf(['bullet', 'attribute'])
 };
 

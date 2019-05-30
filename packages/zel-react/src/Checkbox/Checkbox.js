@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Checkbox = ({ label, disabled, isChecked, handleChange }) => {
+const Checkbox = ({ label, disabled, isChecked, handleChange, ...other }) => {
   return (
-    <div className="zep-checkbox">
+    <div className="zep-checkbox" {...other}>
       <input
         className="zep-checkbox__input"
         type="checkbox"
