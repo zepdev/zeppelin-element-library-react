@@ -21,7 +21,7 @@ const babelOptions = {
 };
 const commonjsOptions = {
   ignoreGlobal: true,
-  include: /node_modules/,
+  include: 'node_modules/**',
   namedExports: {
     '../node_modules/prop-types/index.js': [
       'elementType',
@@ -31,12 +31,7 @@ const commonjsOptions = {
       'oneOfType',
       'element'
     ],
-    '../node_modules/react-is/index.js': [
-      'ForwardRef',
-      'isLazy',
-      'isMemo',
-      'isValidElementType'
-    ]
+    'node_modules/react-is/index.js': ['isForwardRef', 'isValidElementType']
   }
 };
 

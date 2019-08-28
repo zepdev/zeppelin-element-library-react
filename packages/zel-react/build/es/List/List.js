@@ -24,7 +24,7 @@ const List = (_ref) => {
 };
 
 process.env.NODE_ENV !== "production" ? List.propTypes = {
-  className: PropTypes.object,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   variant: PropTypes.oneOf(['bullet', 'attribute'])
 } : void 0;
