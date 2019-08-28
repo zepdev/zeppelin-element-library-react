@@ -1,3 +1,4 @@
+import _extends from "@babel/runtime/helpers/extends";
 import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -12,16 +13,17 @@ const Select = (_ref) => {
   let {
     items: itemsProp,
     onChange,
-    label
+    label,
+    placeholder: placeholderProps
   } = _ref,
       other = _objectWithoutPropertiesLoose(_ref, ["items", "onChange", "label", "placeholder"]);
 
   const items = itemsProp || [];
-  const placeholder = placeholder || 'Select one';
-  return React.createElement(Downshift, {
+  const placeholder = placeholderProps || 'Select one';
+  return React.createElement(Downshift, _extends({
     onChange: selection => onChange(selection),
     itemToString: item => item ? item.value : ''
-  }, ({
+  }, other), ({
     getItemProps,
     getLabelProps,
     getMenuProps,

@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
 var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 var _react = _interopRequireDefault(require("react"));
@@ -28,15 +30,15 @@ var Select = function Select(_ref) {
       placeholderProps = _ref.placeholder,
       other = (0, _objectWithoutProperties2.default)(_ref, ["items", "onChange", "label", "placeholder"]);
   var items = itemsProp || [];
-  var placeholder = placeholder || 'Select one';
-  return _react.default.createElement(_downshift.default, {
+  var placeholder = placeholderProps || 'Select one';
+  return _react.default.createElement(_downshift.default, (0, _extends2.default)({
     onChange: function onChange(selection) {
       return _onChange(selection);
     },
     itemToString: function itemToString(item) {
       return item ? item.value : '';
     }
-  }, function (_ref2) {
+  }, other), function (_ref2) {
     var getItemProps = _ref2.getItemProps,
         getLabelProps = _ref2.getLabelProps,
         getMenuProps = _ref2.getMenuProps,

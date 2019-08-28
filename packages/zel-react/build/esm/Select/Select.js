@@ -1,3 +1,4 @@
+import _extends from "@babel/runtime/helpers/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/objectWithoutProperties";
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,15 +17,15 @@ var Select = function Select(_ref) {
       other = _objectWithoutProperties(_ref, ["items", "onChange", "label", "placeholder"]);
 
   var items = itemsProp || [];
-  var placeholder = placeholder || 'Select one';
-  return React.createElement(Downshift, {
+  var placeholder = placeholderProps || 'Select one';
+  return React.createElement(Downshift, _extends({
     onChange: function onChange(selection) {
       return _onChange(selection);
     },
     itemToString: function itemToString(item) {
       return item ? item.value : '';
     }
-  }, function (_ref2) {
+  }, other), function (_ref2) {
     var getItemProps = _ref2.getItemProps,
         getLabelProps = _ref2.getLabelProps,
         getMenuProps = _ref2.getMenuProps,

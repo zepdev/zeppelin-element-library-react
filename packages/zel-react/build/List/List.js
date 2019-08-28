@@ -36,7 +36,7 @@ var List = function List(_ref) {
 };
 
 process.env.NODE_ENV !== "production" ? List.propTypes = {
-  className: _propTypes.default.object,
+  className: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.object]),
   children: _propTypes.default.oneOfType([_propTypes.default.array, _propTypes.default.object]).isRequired,
   variant: _propTypes.default.oneOf(['bullet', 'attribute'])
 } : void 0;
