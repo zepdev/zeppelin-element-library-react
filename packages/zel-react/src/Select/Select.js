@@ -11,11 +11,12 @@ const Select = ({
   ...other
 }) => {
   const items = itemsProp || [];
-  const placeholder = placeholder || 'Select one';
+  const placeholder = placeholderProps || 'Select one';
   return (
     <Downshift
       onChange={selection => onChange(selection)}
       itemToString={item => (item ? item.value : '')}
+      {...other}
     >
       {({
         getItemProps,

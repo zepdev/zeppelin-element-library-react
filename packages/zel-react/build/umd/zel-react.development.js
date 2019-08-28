@@ -3900,15 +3900,15 @@
                   other = objectWithoutProperties(_ref, ["items", "onChange", "label", "placeholder"]);
 
               var items = itemsProp || [];
-              var placeholder = placeholder || 'Select one';
-              return React__default.createElement(Downshift, {
+              var placeholder = placeholderProps || 'Select one';
+              return React__default.createElement(Downshift, _extends_1({
                 onChange: function onChange(selection) {
                   return _onChange(selection);
                 },
                 itemToString: function itemToString(item) {
                   return item ? item.value : '';
                 }
-              }, function (_ref2) {
+              }, other), function (_ref2) {
                 var getItemProps = _ref2.getItemProps,
                     getLabelProps = _ref2.getLabelProps,
                     getMenuProps = _ref2.getMenuProps,
