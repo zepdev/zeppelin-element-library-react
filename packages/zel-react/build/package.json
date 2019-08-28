@@ -1,0 +1,37 @@
+{
+  "name": "@zlab-de/zel-react",
+  "version": "0.2.6",
+  "private": false,
+  "author": "ZLab",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zepdev/zeppelin-element-library-react"
+  },
+  "description": "React Components for Zeppelin Element Library",
+  "keywords": [
+    "react",
+    "react-component",
+    "zeppelin",
+    "ZLab"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "dependencies": {
+    "@zlab-de/zel-react-icons": "^0.1.1",
+    "clsx": "^1.0.4",
+    "downshift": "^3.2.12",
+    "zeppelin-element-library": "^0.12.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "main": "./index.js",
+  "module": "./esm/index.js"
+}

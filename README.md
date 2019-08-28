@@ -1,68 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# zeppelin-element-library-react
 
-## Available Scripts
+A library of React components created using `create-react-app` for Zeppelin Projects.
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+Run the following command:
+`yarn add zeppelin-element-library-react`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Creation of SVG icons from @Material-UI
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+1. clone (material-ui repo)[https://github.com/mui-org/material-ui]
+2. cd to packages/material-ui-icons
+3. copy all of the zepicons svgs (just the svg files) to a new folder and place that in the fixtures folder (ie ./fixtures/zep/svg)
+4. in the package.json file create a new script:
 
-### `npm test`
+```
+  "src:iconsZEP": "cd ../../ && UV_THREADPOOL_SIZE=64 babel-node --config-file ./babel.config.js packages/material-ui-icons/builder.js --output-dir packages/material-ui-icons/src --svg-dir packages/material-ui-icons/fixtures/svg --renameFilter ./renameFilters/default.js",
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. change line 25 of renameFilters/default.js from an \_ to - (to take our zepicons-name from a '-' to CamelCase)
 
-### `npm run build`
+```
+fileName = fileName.replace(/(^.)|(-)(.)/g, (match, p1, p2, p3) => (p1 || p3).toUpperCase());
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+6. run yarn src:iconsZEP
+7. run yarn build
+8. copy the created SVG icon components from the build folder to zeppelin-elements-library-react/src/icons
