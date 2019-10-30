@@ -1,6 +1,6 @@
 {
   "name": "@zlab-de/zel-react-icons",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "description": "Zeppelin Icons: Made from Material-UI Icons",
   "main": "./index.js",

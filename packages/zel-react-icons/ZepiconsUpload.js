@@ -11,9 +11,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _createSvgIcon = _interopRequireDefault(require("./utils/createSvgIcon"));
 
-var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.default.Fragment, null, _react.default.createElement("path", {
-  transform: "scale(Infinity, Infinity)",
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
   d: "M12 22.667v-8H6.667L16 5.334l9.333 9.333H20v8h-8zM6.667 28v-2.667h18.667V28H6.667z"
-})), 'ZepiconsUpload');
+}), 'ZepiconsUpload');
 
 exports.default = _default;

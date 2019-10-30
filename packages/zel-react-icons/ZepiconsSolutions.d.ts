@@ -1,1 +1,1 @@
-export { default } from '../src/utils/SvgIcon';
+export { default } from '@material-ui/core/SvgIcon';
