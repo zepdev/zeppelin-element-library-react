@@ -30,13 +30,13 @@ var Select = function Select(_ref) {
       placeholderProps = _ref.placeholder,
       other = (0, _objectWithoutProperties2.default)(_ref, ["items", "onChange", "label", "placeholder"]);
   var items = itemsProp || [];
-  var placeholder = placeholderProps || 'Select one';
+  var placeholder = placeholderProps || "Select one";
   return _react.default.createElement(_downshift.default, (0, _extends2.default)({
     onChange: function onChange(selection) {
       return _onChange(selection);
     },
     itemToString: function itemToString(item) {
-      return item ? item.value : '';
+      return item ? item.value : "";
     }
   }, other), function (_ref2) {
     var getItemProps = _ref2.getItemProps,
@@ -47,9 +47,11 @@ var Select = function Select(_ref) {
         inputValue = _ref2.inputValue,
         highlightedIndex = _ref2.highlightedIndex,
         selectedItem = _ref2.selectedItem;
-    return _react.default.createElement("div", null, _react.default.createElement("label", getLabelProps({
-      className: 'zep-select__label',
-      htmlFor: 'zep-select'
+    return _react.default.createElement("div", {
+      className: "zep-search"
+    }, _react.default.createElement("label", getLabelProps({
+      className: "zep-select__label",
+      htmlFor: "zep-select"
     }), label), _react.default.createElement("button", {
       id: "zep-select",
       type: "button",
@@ -58,17 +60,24 @@ var Select = function Select(_ref) {
       "data-toggle": "dropdown",
       "aria-haspopup": "true",
       "aria-expanded": isOpen
-    }, selectedItem ? selectedItem.value : placeholder, _ref3), isOpen ? _react.default.createElement("ul", getMenuProps({
-      className: 'zep-select__list'
+    }, selectedItem ? selectedItem.value : placeholder, _ref3), isOpen ? _react.default.createElement("ul", (0, _extends2.default)({}, getMenuProps({
+      className: "zep-select__list"
+    }), {
+      style: {
+        position: "absolute",
+        zIndex: 2000,
+        left: 0,
+        right: 0
+      }
     }), items.map(function (item, index) {
       return _react.default.createElement("li", getItemProps({
         key: "listItem".concat(index),
         index: index,
         item: item,
-        className: 'zep-select__listitem',
+        className: "zep-select__listitem",
         style: {
-          backgroundColor: highlightedIndex === index ? '#eceeef' : 'white',
-          fontWeight: selectedItem === item ? 'bold' : 'normal'
+          backgroundColor: highlightedIndex === index ? "#eceeef" : "white",
+          fontWeight: selectedItem === item ? "bold" : "normal"
         }
       }), item.value);
     })) : null);

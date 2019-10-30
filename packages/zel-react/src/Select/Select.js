@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Downshift from 'downshift';
-import ZepiconsNavigationDropdown from '@zlab-de/zel-react-icons/ZepiconsNavigationDropdown';
+import React from "react";
+import PropTypes from "prop-types";
+import Downshift from "downshift";
+import ZepiconsNavigationDropdown from "@zlab-de/zel-react-icons/ZepiconsNavigationDropdown";
 
 const Select = ({
   items: itemsProp,
@@ -11,11 +11,11 @@ const Select = ({
   ...other
 }) => {
   const items = itemsProp || [];
-  const placeholder = placeholderProps || 'Select one';
+  const placeholder = placeholderProps || "Select one";
   return (
     <Downshift
       onChange={selection => onChange(selection)}
-      itemToString={item => (item ? item.value : '')}
+      itemToString={item => (item ? item.value : "")}
       {...other}
     >
       {({
@@ -28,11 +28,11 @@ const Select = ({
         highlightedIndex,
         selectedItem
       }) => (
-        <div>
+        <div className="zep-search">
           <label
             {...getLabelProps({
-              className: 'zep-select__label',
-              htmlFor: 'zep-select'
+              className: "zep-select__label",
+              htmlFor: "zep-select"
             })}
           >
             {label}
@@ -50,18 +50,21 @@ const Select = ({
             <ZepiconsNavigationDropdown className="zep-select__icon" />
           </button>
           {isOpen ? (
-            <ul {...getMenuProps({ className: 'zep-select__list' })}>
+            <ul
+              {...getMenuProps({ className: "zep-select__list" })}
+              style={{ position: "absolute", zIndex: 2000, left: 0, right: 0 }}
+            >
               {items.map((item, index) => (
                 <li
                   {...getItemProps({
                     key: `listItem${index}`,
                     index,
                     item,
-                    className: 'zep-select__listitem',
+                    className: "zep-select__listitem",
                     style: {
                       backgroundColor:
-                        highlightedIndex === index ? '#eceeef' : 'white',
-                      fontWeight: selectedItem === item ? 'bold' : 'normal'
+                        highlightedIndex === index ? "#eceeef" : "white",
+                      fontWeight: selectedItem === item ? "bold" : "normal"
                     }
                   })}
                 >
@@ -84,3 +87,4 @@ Select.propTypes = {
 };
 
 export default Select;
+
