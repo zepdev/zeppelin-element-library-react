@@ -1,29 +1,17 @@
-'use strict';
-
-var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault');
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.default = createSvgIcon;
-
-var _extends2 = _interopRequireDefault(require('@babel/runtime/helpers/extends'));
-
-var _react = _interopRequireDefault(require('react'));
-
-var _SvgIcon = _interopRequireDefault(require('./SvgIcon'));
-
-function createSvgIcon(path, displayName) {
-  var Component = _react.default.memo(_react.default.forwardRef(function (props, ref) {
-    return _react.default.createElement(_SvgIcon.default, (0, _extends2.default)({}, props, {
+import _extends from "@babel/runtime/helpers/esm/extends";
+import React from 'react';
+import SvgIcon from '@material-ui/core/SvgIcon';
+export default function createSvgIcon(path, displayName) {
+  var Component = React.memo(React.forwardRef(function (props, ref) {
+    return React.createElement(SvgIcon, _extends({
       ref: ref
-    }), path);
+    }, props), path);
   }));
 
   if (process.env.NODE_ENV !== 'production') {
-    Component.displayName = ''.concat(displayName, 'Icon');
+    Component.displayName = "".concat(displayName, "Icon");
   }
 
-  Component.muiName = _SvgIcon.default.muiName;
+  Component.muiName = SvgIcon.muiName;
   return Component;
 }
