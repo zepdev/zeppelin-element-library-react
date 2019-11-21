@@ -13,7 +13,7 @@ const RadioGroup = ({
     <fieldset
       role="group"
       aria-labelledby={`radio_${title}`}
-      className={clsx('zep-typo--normal-3', classNameProp)}
+      className={clsx('zep-typo--normal-body1', classNameProp)}
       {...other}
     >
       <legend id={`radio_${title}`} className={classNameLegend}>

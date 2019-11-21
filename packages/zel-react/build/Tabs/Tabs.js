@@ -15,7 +15,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _classnames = _interopRequireDefault(require("classnames"));
+var _clsx = _interopRequireDefault(require("clsx"));
 
 var Tabs = function Tabs(_ref) {
   var classNameProp = _ref.className,
@@ -46,7 +46,7 @@ var Tabs = function Tabs(_ref) {
   });
 
   return _react.default.createElement("div", (0, _extends2.default)({
-    className: (0, _classnames.default)(classNameProp, 'zep-tabs'),
+    className: (0, _clsx.default)(classNameProp, 'zep-tabs'),
     "data-testid": "tabs",
     role: "tablist",
     "aria-label": ariaLabel
