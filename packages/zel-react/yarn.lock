@@ -11619,7 +11619,7 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-zeppelin-element-library@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/zeppelin-element-library/-/zeppelin-element-library-1.0.4.tgz#3dcafe2c433acc0c847484603f9ea7318dc07e63"
-  integrity sha512-hs/1JGb1+fXllBB+clFLno/D3lLAmCJ9ob/9LqIFStN5+fdSTsngAkWLLcxURgCTpzYsEYGqqTILxyD7bcCk7w==
+zeppelin-element-library@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/zeppelin-element-library/-/zeppelin-element-library-1.0.5.tgz#8317df214a9ed118ac181b149d90b9f1bb29bdce"
+  integrity sha512-7JVwWBgJzYeGAi8AZHVEC8IpGUw9yMh6RiZdHHiwjRK0QjykL9zAjDmLW3Tec0BLh3ql1yQ6z/du3wUaiZ9PYQ==
