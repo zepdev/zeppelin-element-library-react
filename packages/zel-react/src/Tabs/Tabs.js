@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import clsx from 'clsx';
 
 const Tabs = ({
   className: classNameProp,
@@ -33,7 +33,7 @@ const Tabs = ({
 
   return (
     <div
-      className={classnames(classNameProp, 'zep-tabs')}
+      className={clsx(classNameProp, 'zep-tabs')}
       data-testid="tabs"
       role="tablist"
       aria-label={ariaLabel}

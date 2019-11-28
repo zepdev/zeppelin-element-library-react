@@ -26,7 +26,7 @@ var RadioGroup = function RadioGroup(_ref) {
   return _react.default.createElement("fieldset", (0, _extends2.default)({
     role: "group",
     "aria-labelledby": "radio_".concat(title),
-    className: (0, _clsx.default)('zep-typo--normal-3', classNameProp)
+    className: (0, _clsx.default)('zep-typo--normal-body1', classNameProp)
   }, other), _react.default.createElement("legend", {
     id: "radio_".concat(title),
     className: classNameLegend

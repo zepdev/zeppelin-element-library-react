@@ -2,7 +2,7 @@ import _extends from "@babel/runtime/helpers/extends";
 import _objectWithoutPropertiesLoose from "@babel/runtime/helpers/objectWithoutPropertiesLoose";
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import clsx from 'clsx';
 
 const Tabs = (_ref) => {
   let {
@@ -34,7 +34,7 @@ const Tabs = (_ref) => {
     });
   });
   return React.createElement("div", _extends({
-    className: classnames(classNameProp, 'zep-tabs'),
+    className: clsx(classNameProp, 'zep-tabs'),
     "data-testid": "tabs",
     role: "tablist",
     "aria-label": ariaLabel

@@ -16,7 +16,7 @@ const RadioGroup = (_ref) => {
   return React.createElement("fieldset", _extends({
     role: "group",
     "aria-labelledby": `radio_${title}`,
-    className: clsx('zep-typo--normal-3', classNameProp)
+    className: clsx('zep-typo--normal-body1', classNameProp)
   }, other), React.createElement("legend", {
     id: `radio_${title}`,
     className: classNameLegend
