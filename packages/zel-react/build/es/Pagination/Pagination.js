@@ -39,15 +39,22 @@ const Pagination = (_ref) => {
   } = _ref,
       other = _objectWithoutPropertiesLoose(_ref, ["className", "pages", "pagesToDisplay", "currentPage", "onPageChange"]);
 
-  const pages = Number(pagesProp);
-  const pagesToDisplay = Number(pagesToDisplayProp) < pages ? Number(pagesToDisplayProp) : pages;
-  const startDisplayPages = createArray(pagesToDisplay, 1); // changes the number of page buttons that are displayed
-
-  const [displayedPages, setDisplayedPages] = useState(startDisplayPages);
+  const [pages, setPages] = useState(0);
+  const [pagesToDisplay, setPagesToDisplay] = useState(0);
+  const [displayedPages, setDisplayedPages] = useState([]);
+  useEffect(() => {
+    let tempPages = Number(pagesProp);
+    let tempPagesToDisplay = Number(pagesToDisplayProp) < tempPages ? Number(pagesToDisplayProp) : tempPages;
+    let tempDisplayPages = createArray(tempPagesToDisplay, 1);
+    setPages(tempPages);
+    setPagesToDisplay(tempPagesToDisplay);
+    setDisplayedPages(tempDisplayPages);
+  }, [pagesProp, pagesToDisplayProp]);
 
   const handleBackOnePage = () => {
     if (currentPage === 1) {
       onPageChange(1);
+      let startDisplayPages = createArray(pagesToDisplay, 1);
       setDisplayedPages(startDisplayPages);
     } else if (currentPage === displayedPages[0]) {
       const newDisplay = createArray(pagesToDisplay, currentPage - 1);
@@ -81,6 +88,7 @@ const Pagination = (_ref) => {
   }, other), React.createElement(IconButton, {
     onClick: () => {
       onPageChange(1);
+      let startDisplayPages = createArray(pagesToDisplay, 1);
       setDisplayedPages(startDisplayPages);
     },
     disabled: currentPage === 1

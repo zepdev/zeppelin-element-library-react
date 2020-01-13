@@ -1881,18 +1881,34 @@
                   onPageChange = _ref.onPageChange,
                   other = objectWithoutProperties(_ref, ["className", "pages", "pagesToDisplay", "currentPage", "onPageChange"]);
 
-              var pages = Number(pagesProp);
-              var pagesToDisplay = Number(pagesToDisplayProp) < pages ? Number(pagesToDisplayProp) : pages;
-              var startDisplayPages = createArray(pagesToDisplay, 1); // changes the number of page buttons that are displayed
-
-              var _useState = React.useState(startDisplayPages),
+              var _useState = React.useState(0),
                   _useState2 = slicedToArray(_useState, 2),
-                  displayedPages = _useState2[0],
-                  setDisplayedPages = _useState2[1];
+                  pages = _useState2[0],
+                  setPages = _useState2[1];
+
+              var _useState3 = React.useState(0),
+                  _useState4 = slicedToArray(_useState3, 2),
+                  pagesToDisplay = _useState4[0],
+                  setPagesToDisplay = _useState4[1];
+
+              var _useState5 = React.useState([]),
+                  _useState6 = slicedToArray(_useState5, 2),
+                  displayedPages = _useState6[0],
+                  setDisplayedPages = _useState6[1];
+
+              useEffect(function () {
+                var tempPages = Number(pagesProp);
+                var tempPagesToDisplay = Number(pagesToDisplayProp) < tempPages ? Number(pagesToDisplayProp) : tempPages;
+                var tempDisplayPages = createArray(tempPagesToDisplay, 1);
+                setPages(tempPages);
+                setPagesToDisplay(tempPagesToDisplay);
+                setDisplayedPages(tempDisplayPages);
+              }, [pagesProp, pagesToDisplayProp]);
 
               var handleBackOnePage = function handleBackOnePage() {
                 if (currentPage === 1) {
                   onPageChange(1);
+                  var startDisplayPages = createArray(pagesToDisplay, 1);
                   setDisplayedPages(startDisplayPages);
                 } else if (currentPage === displayedPages[0]) {
                   var newDisplay = createArray(pagesToDisplay, currentPage - 1);
@@ -1926,6 +1942,7 @@
               }, other), React__default.createElement(IconButton, {
                 onClick: function onClick() {
                   onPageChange(1);
+                  var startDisplayPages = createArray(pagesToDisplay, 1);
                   setDisplayedPages(startDisplayPages);
                 },
                 disabled: currentPage === 1
@@ -2513,11 +2530,17 @@
              * @param {number} moveAmount Number of positions to move. Negative to move backwards, positive forwards.
              * @param {number} baseIndex The initial position to move from.
              * @param {number} itemCount The total number of items.
+             * @param {Function} getItemNodeFromIndex Used to check if item is disabled.
+             * @param {boolean} circular Specify if navigation is circular. Default is true.
              * @returns {number} The new index after the move.
              */
 
 
-            function getNextWrappingIndex(moveAmount, baseIndex, itemCount) {
+            function getNextWrappingIndex(moveAmount, baseIndex, itemCount, getItemNodeFromIndex, circular) {
+              if (circular === void 0) {
+                circular = true;
+              }
+
               var itemsLastIndex = itemCount - 1;
 
               if (typeof baseIndex !== 'number' || baseIndex < 0 || baseIndex >= itemCount) {
@@ -2527,12 +2550,52 @@
               var newIndex = baseIndex + moveAmount;
 
               if (newIndex < 0) {
-                newIndex = itemsLastIndex;
+                newIndex = circular ? itemsLastIndex : 0;
               } else if (newIndex > itemsLastIndex) {
-                newIndex = 0;
+                newIndex = circular ? 0 : itemsLastIndex;
               }
 
-              return newIndex;
+              var nonDisabledNewIndex = getNextNonDisabledIndex(moveAmount, newIndex, itemCount, getItemNodeFromIndex, circular);
+              return nonDisabledNewIndex === -1 ? baseIndex : nonDisabledNewIndex;
+            }
+            /**
+             * Returns the next index in the list of an item that is not disabled.
+             *
+             * @param {number} moveAmount Number of positions to move. Negative to move backwards, positive forwards.
+             * @param {number} baseIndex The initial position to move from.
+             * @param {number} itemCount The total number of items.
+             * @param {Function} getItemNodeFromIndex Used to check if item is disabled.
+             * @param {boolean} circular Specify if navigation is circular. Default is true.
+             * @returns {number} The new index. Returns baseIndex if item is not disabled. Returns next non-disabled item otherwise. If no non-disabled found it will return -1.
+             */
+
+
+            function getNextNonDisabledIndex(moveAmount, baseIndex, itemCount, getItemNodeFromIndex, circular) {
+              var currentElementNode = getItemNodeFromIndex(baseIndex);
+
+              if (!currentElementNode || !currentElementNode.hasAttribute('disabled')) {
+                return baseIndex;
+              }
+
+              if (moveAmount > 0) {
+                for (var index = baseIndex + 1; index < itemCount; index++) {
+                  if (!getItemNodeFromIndex(index).hasAttribute('disabled')) {
+                    return index;
+                  }
+                }
+              } else {
+                for (var _index = baseIndex - 1; _index >= 0; _index--) {
+                  if (!getItemNodeFromIndex(_index).hasAttribute('disabled')) {
+                    return _index;
+                  }
+                }
+              }
+
+              if (circular) {
+                return moveAmount > 0 ? getNextNonDisabledIndex(1, 0, itemCount, getItemNodeFromIndex, false) : getNextNonDisabledIndex(-1, itemCount - 1, itemCount, getItemNodeFromIndex, false);
+              }
+
+              return -1;
             }
 
             var cleanupStatus = debounce(function () {
@@ -2861,7 +2924,14 @@
                           var itemCount = _this2.getItemCount();
 
                           if (itemCount > 0) {
-                            _this2.setHighlightedIndex(getNextWrappingIndex(1, _this2.getState().highlightedIndex, itemCount), {
+                            var _this2$getState = _this2.getState(),
+                                highlightedIndex = _this2$getState.highlightedIndex;
+
+                            var nextHighlightedIndex = getNextWrappingIndex(1, highlightedIndex, itemCount, function (index) {
+                              return _this2.getItemNodeFromIndex(index);
+                            });
+
+                            _this2.setHighlightedIndex(nextHighlightedIndex, {
                               type: keyDownArrowDown
                             });
                           }
@@ -2886,8 +2956,15 @@
                           var itemCount = _this3.getItemCount();
 
                           if (itemCount > 0) {
-                            _this3.setHighlightedIndex(getNextWrappingIndex(-1, _this3.getState().highlightedIndex, itemCount), {
-                              type: keyDownArrowDown
+                            var _this3$getState = _this3.getState(),
+                                highlightedIndex = _this3$getState.highlightedIndex;
+
+                            var nextHighlightedIndex = getNextWrappingIndex(-1, highlightedIndex, itemCount, function (index) {
+                              return _this3.getItemNodeFromIndex(index);
+                            });
+
+                            _this3.setHighlightedIndex(nextHighlightedIndex, {
+                              type: keyDownArrowUp
                             });
                           }
                         });
@@ -2931,12 +3008,44 @@
                   });
                   _this.inputKeyDownHandlers = _extends({}, _this.keyDownHandlers, {
                     Home: function Home(event) {
-                      this.highlightFirstOrLastIndex(event, true, {
+                      var _this4 = this;
+
+                      event.preventDefault();
+                      var itemCount = this.getItemCount();
+
+                      var _this$getState3 = this.getState(),
+                          isOpen = _this$getState3.isOpen;
+
+                      if (itemCount <= 0 || !isOpen) {
+                        return;
+                      } // get next non-disabled starting downwards from 0 if that's disabled.
+
+
+                      var newHighlightedIndex = getNextNonDisabledIndex(1, 0, itemCount, function (index) {
+                        return _this4.getItemNodeFromIndex(index);
+                      }, false);
+                      this.setHighlightedIndex(newHighlightedIndex, {
                         type: keyDownHome
                       });
                     },
                     End: function End(event) {
-                      this.highlightFirstOrLastIndex(event, false, {
+                      var _this5 = this;
+
+                      event.preventDefault();
+                      var itemCount = this.getItemCount();
+
+                      var _this$getState4 = this.getState(),
+                          isOpen = _this$getState4.isOpen;
+
+                      if (itemCount <= 0 || !isOpen) {
+                        return;
+                      } // get next non-disabled starting upwards from last index if that's disabled.
+
+
+                      var newHighlightedIndex = getNextNonDisabledIndex(-1, itemCount - 1, itemCount, function (index) {
+                        return _this5.getItemNodeFromIndex(index);
+                      }, false);
+                      this.setHighlightedIndex(newHighlightedIndex, {
                         type: keyDownEnd
                       });
                     }
@@ -2951,8 +3060,8 @@
                         onBlur = _ref3.onBlur,
                         rest = _objectWithoutPropertiesLoose$1(_ref3, ["onClick", "onPress", "onKeyDown", "onKeyUp", "onBlur"]);
 
-                    var _this$getState3 = _this.getState(),
-                        isOpen = _this$getState3.isOpen;
+                    var _this$getState5 = _this.getState(),
+                        isOpen = _this$getState5.isOpen;
 
                     var enabledEventHandlers = {
                       onClick: callAllEventHandlers(onClick, _this.buttonHandleClick),
@@ -3042,10 +3151,10 @@
 
                     onChangeKey = 'onChange';
 
-                    var _this$getState4 = _this.getState(),
-                        inputValue = _this$getState4.inputValue,
-                        isOpen = _this$getState4.isOpen,
-                        highlightedIndex = _this$getState4.highlightedIndex;
+                    var _this$getState6 = _this.getState(),
+                        inputValue = _this$getState6.inputValue,
+                        isOpen = _this$getState6.isOpen,
+                        highlightedIndex = _this$getState6.highlightedIndex;
 
                     if (!rest.disabled) {
                       var _eventHandlers;
@@ -3226,9 +3335,9 @@
                         highlightedIndex: _this.props.defaultHighlightedIndex
                       }, {}, otherStateToSet);
                     }, function () {
-                      var _this$getState5 = _this.getState(),
-                          isOpen = _this$getState5.isOpen,
-                          highlightedIndex = _this$getState5.highlightedIndex;
+                      var _this$getState7 = _this.getState(),
+                          isOpen = _this$getState7.isOpen,
+                          highlightedIndex = _this$getState7.highlightedIndex;
 
                       if (isOpen) {
                         if (_this.getItemCount() > 0 && typeof highlightedIndex === 'number') {
@@ -3329,14 +3438,14 @@
                 ;
 
                 _proto.getState = function getState(stateToMerge) {
-                  var _this4 = this;
+                  var _this6 = this;
 
                   if (stateToMerge === void 0) {
                     stateToMerge = this.state;
                   }
 
                   return Object.keys(stateToMerge).reduce(function (state, key) {
-                    state[key] = _this4.isControlledProp(key) ? _this4.props[key] : stateToMerge[key];
+                    state[key] = _this6.isControlledProp(key) ? _this6.props[key] : stateToMerge[key];
                     return state;
                   }, {});
                 }
@@ -3382,31 +3491,27 @@
                 };
 
                 _proto.moveHighlightedIndex = function moveHighlightedIndex(amount, otherStateToSet) {
+                  var _this7 = this;
+
                   var itemCount = this.getItemCount();
 
+                  var _this$getState8 = this.getState(),
+                      highlightedIndex = _this$getState8.highlightedIndex;
+
                   if (itemCount > 0) {
-                    var nextHighlightedIndex = getNextWrappingIndex(amount, this.getState().highlightedIndex, itemCount);
+                    var nextHighlightedIndex = getNextWrappingIndex(amount, highlightedIndex, itemCount, function (index) {
+                      return _this7.getItemNodeFromIndex(index);
+                    });
                     this.setHighlightedIndex(nextHighlightedIndex, otherStateToSet);
                   }
                 };
 
-                _proto.highlightFirstOrLastIndex = function highlightFirstOrLastIndex(event, first, otherStateToSet) {
-                  var itemsLastIndex = this.getItemCount() - 1;
-
-                  if (itemsLastIndex < 0 || !this.getState().isOpen) {
-                    return;
-                  }
-
-                  event.preventDefault();
-                  this.setHighlightedIndex(first ? 0 : itemsLastIndex, otherStateToSet);
-                };
-
                 _proto.getStateAndHelpers = function getStateAndHelpers() {
-                  var _this$getState6 = this.getState(),
-                      highlightedIndex = _this$getState6.highlightedIndex,
-                      inputValue = _this$getState6.inputValue,
-                      selectedItem = _this$getState6.selectedItem,
-                      isOpen = _this$getState6.isOpen;
+                  var _this$getState9 = this.getState(),
+                      highlightedIndex = _this$getState9.highlightedIndex,
+                      inputValue = _this$getState9.inputValue,
+                      selectedItem = _this$getState9.selectedItem,
+                      isOpen = _this$getState9.isOpen;
 
                   var itemToString = this.props.itemToString;
                   var id = this.id;
@@ -3465,7 +3570,7 @@
                 ;
 
                 _proto.componentDidMount = function componentDidMount() {
-                  var _this5 = this;
+                  var _this8 = this;
 
                   /* istanbul ignore if (react-native) */
                   if ( this.getMenuProps.called && !this.getMenuProps.suppressRefError) {
@@ -3480,8 +3585,8 @@
                         checkActiveElement = true;
                       }
 
-                      var document = _this5.props.environment.document;
-                      return [_this5._rootNode, _this5._menuNode].some(function (contextNode) {
+                      var document = _this8.props.environment.document;
+                      return [_this8._rootNode, _this8._menuNode].some(function (contextNode) {
                         return contextNode && (isOrContainsNode(contextNode, target) || checkActiveElement && isOrContainsNode(contextNode, document.activeElement));
                       });
                     }; // this.isMouseDown helps us track whether the mouse is currently held down.
@@ -3492,20 +3597,20 @@
 
 
                     var onMouseDown = function () {
-                      _this5.isMouseDown = true;
+                      _this8.isMouseDown = true;
                     };
 
                     var onMouseUp = function (event) {
-                      _this5.isMouseDown = false; // if the target element or the activeElement is within a downshift node
+                      _this8.isMouseDown = false; // if the target element or the activeElement is within a downshift node
                       // then we don't want to reset downshift
 
                       var contextWithinDownshift = targetWithinDownshift(event.target);
 
-                      if (!contextWithinDownshift && _this5.getState().isOpen) {
-                        _this5.reset({
+                      if (!contextWithinDownshift && _this8.getState().isOpen) {
+                        _this8.reset({
                           type: mouseUp
                         }, function () {
-                          return _this5.props.onOuterClick(_this5.getStateAndHelpers());
+                          return _this8.props.onOuterClick(_this8.getStateAndHelpers());
                         });
                       }
                     }; // Touching an element in iOS gives focus and hover states, but touching out of
@@ -3517,21 +3622,21 @@
 
 
                     var onTouchStart = function () {
-                      _this5.isTouchMove = false;
+                      _this8.isTouchMove = false;
                     };
 
                     var onTouchMove = function () {
-                      _this5.isTouchMove = true;
+                      _this8.isTouchMove = true;
                     };
 
                     var onTouchEnd = function (event) {
                       var contextWithinDownshift = targetWithinDownshift(event.target, false);
 
-                      if (!_this5.isTouchMove && !contextWithinDownshift && _this5.getState().isOpen) {
-                        _this5.reset({
+                      if (!_this8.isTouchMove && !contextWithinDownshift && _this8.getState().isOpen) {
+                        _this8.reset({
                           type: touchEnd
                         }, function () {
-                          return _this5.props.onOuterClick(_this5.getStateAndHelpers());
+                          return _this8.props.onOuterClick(_this8.getStateAndHelpers());
                         });
                       }
                     };
@@ -3544,9 +3649,9 @@
                     environment.addEventListener('touchend', onTouchEnd);
 
                     this.cleanup = function () {
-                      _this5.internalClearTimeouts();
+                      _this8.internalClearTimeouts();
 
-                      _this5.updateStatus.cancel();
+                      _this8.updateStatus.cancel();
 
                       environment.removeEventListener('mousedown', onMouseDown);
                       environment.removeEventListener('mouseup', onMouseUp);
@@ -3775,6 +3880,75 @@
               });
             }
 
+            function itemToString(item) {
+              return item ? String(item) : '';
+            }
+            /**
+             * Default state reducer that returns the changes.
+             *
+             * @param {Object} s state.
+             * @param {Object} a action with changes.
+             * @returns {Object} changes.
+             */
+
+
+            function stateReducer(s, a) {
+              return a.changes;
+            }
+            /**
+             * Returns a message to be added to aria-live region when dropdown is open.
+             *
+             * @param {*} selectionParameters Parameters required to build the message.
+             * @returns {string} The a11y message.
+             */
+
+
+            function getA11yStatusMessage$1(selectionParameters) {
+              var isOpen = selectionParameters.isOpen,
+                  items = selectionParameters.items;
+
+              if (!items) {
+                return '';
+              }
+
+              var resultCount = items.length;
+
+              if (isOpen) {
+                if (resultCount === 0) {
+                  return 'No results are available';
+                }
+
+                return resultCount + " result" + (resultCount === 1 ? ' is' : 's are') + " available, use up and down arrow keys to navigate. Press Enter key to select.";
+              }
+
+              return '';
+            }
+            /**
+             * Returns a message to be added to aria-live region when item is selected.
+             *
+             * @param {Object} selectionParameters Parameters required to build the message.
+             * @returns {string} The a11y message.
+             */
+
+
+            function getA11ySelectionMessage(selectionParameters) {
+              var selectedItem = selectionParameters.selectedItem,
+                  itemToStringLocal = selectionParameters.itemToString;
+              return itemToStringLocal(selectedItem) + " has been selected.";
+            }
+
+            var defaultProps = {
+              itemToString: itemToString,
+              stateReducer: stateReducer,
+              getA11yStatusMessage: getA11yStatusMessage$1,
+              getA11ySelectionMessage: getA11ySelectionMessage,
+              scrollIntoView: scrollIntoView,
+              circularNavigation: false,
+              environment: typeof window === 'undefined'
+              /* istanbul ignore next (ssr) */
+              ? {} : window
+            };
+
             var propTypes$1 = {
               items: propTypes.array.isRequired,
               itemToString: propTypes.func,
@@ -3810,6 +3984,51 @@
                 })
               })
             };
+
+            var propTypes$1$1 = {
+              items: propTypes.array.isRequired,
+              itemToString: propTypes.func,
+              getA11yStatusMessage: propTypes.func,
+              getA11ySelectionMessage: propTypes.func,
+              circularNavigation: propTypes.bool,
+              highlightedIndex: propTypes.number,
+              defaultHighlightedIndex: propTypes.number,
+              initialHighlightedIndex: propTypes.number,
+              isOpen: propTypes.bool,
+              defaultIsOpen: propTypes.bool,
+              initialIsOpen: propTypes.bool,
+              selectedItem: propTypes.any,
+              initialSelectedItem: propTypes.any,
+              defaultSelectedItem: propTypes.any,
+              inputValue: propTypes.string,
+              defaultInputValue: propTypes.string,
+              initialInputValue: propTypes.string,
+              id: propTypes.string,
+              labelId: propTypes.string,
+              menuId: propTypes.string,
+              getItemId: propTypes.func,
+              inputId: propTypes.string,
+              toggleButtonId: propTypes.string,
+              stateReducer: propTypes.func,
+              onSelectedItemChange: propTypes.func,
+              onHighlightedIndexChange: propTypes.func,
+              onStateChange: propTypes.func,
+              onIsOpenChange: propTypes.func,
+              onInputValueChange: propTypes.func,
+              environment: propTypes.shape({
+                addEventListener: propTypes.func,
+                removeEventListener: propTypes.func,
+                document: propTypes.shape({
+                  getElementById: propTypes.func,
+                  activeElement: propTypes.any,
+                  body: propTypes.any
+                })
+              })
+            };
+
+            var defaultProps$1 = _extends({}, defaultProps, {
+              circularNavigation: true
+            });
 
             var ZepiconsSearch = createCommonjsModule(function (module, exports) {
 

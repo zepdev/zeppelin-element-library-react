@@ -40,18 +40,34 @@ var Pagination = function Pagination(_ref) {
       onPageChange = _ref.onPageChange,
       other = _objectWithoutProperties(_ref, ["className", "pages", "pagesToDisplay", "currentPage", "onPageChange"]);
 
-  var pages = Number(pagesProp);
-  var pagesToDisplay = Number(pagesToDisplayProp) < pages ? Number(pagesToDisplayProp) : pages;
-  var startDisplayPages = createArray(pagesToDisplay, 1); // changes the number of page buttons that are displayed
-
-  var _useState = useState(startDisplayPages),
+  var _useState = useState(0),
       _useState2 = _slicedToArray(_useState, 2),
-      displayedPages = _useState2[0],
-      setDisplayedPages = _useState2[1];
+      pages = _useState2[0],
+      setPages = _useState2[1];
+
+  var _useState3 = useState(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      pagesToDisplay = _useState4[0],
+      setPagesToDisplay = _useState4[1];
+
+  var _useState5 = useState([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      displayedPages = _useState6[0],
+      setDisplayedPages = _useState6[1];
+
+  useEffect(function () {
+    var tempPages = Number(pagesProp);
+    var tempPagesToDisplay = Number(pagesToDisplayProp) < tempPages ? Number(pagesToDisplayProp) : tempPages;
+    var tempDisplayPages = createArray(tempPagesToDisplay, 1);
+    setPages(tempPages);
+    setPagesToDisplay(tempPagesToDisplay);
+    setDisplayedPages(tempDisplayPages);
+  }, [pagesProp, pagesToDisplayProp]);
 
   var handleBackOnePage = function handleBackOnePage() {
     if (currentPage === 1) {
       onPageChange(1);
+      var startDisplayPages = createArray(pagesToDisplay, 1);
       setDisplayedPages(startDisplayPages);
     } else if (currentPage === displayedPages[0]) {
       var newDisplay = createArray(pagesToDisplay, currentPage - 1);
@@ -85,6 +101,7 @@ var Pagination = function Pagination(_ref) {
   }, other), React.createElement(IconButton, {
     onClick: function onClick() {
       onPageChange(1);
+      var startDisplayPages = createArray(pagesToDisplay, 1);
       setDisplayedPages(startDisplayPages);
     },
     disabled: currentPage === 1

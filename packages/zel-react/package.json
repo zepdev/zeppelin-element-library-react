@@ -34,7 +34,7 @@
   "dependencies": {
     "@zlab-de/zel-react-icons": "^0.1.2",
     "clsx": "^1.0.4",
-    "downshift": "^3.4.8",
+    "downshift": "^4.0.4",
     "zeppelin-element-library": "^1.2.1"
   },
   "sideEffects": false,
