@@ -1896,7 +1896,7 @@
                   displayedPages = _useState6[0],
                   setDisplayedPages = _useState6[1];
 
-              useEffect(function () {
+              React.useEffect(function () {
                 var tempPages = Number(pagesProp);
                 var tempPagesToDisplay = Number(pagesToDisplayProp) < tempPages ? Number(pagesToDisplayProp) : tempPages;
                 var tempDisplayPages = createArray(tempPagesToDisplay, 1);

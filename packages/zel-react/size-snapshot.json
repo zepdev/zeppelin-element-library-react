@@ -5,8 +5,8 @@
     "gzipped": 2364
   },
   "build/umd/zel-react.production.min.js": {
-    "bundled": 143126,
-    "minified": 42874,
+    "bundled": 143132,
+    "minified": 42876,
     "gzipped": 12555
   }
 }

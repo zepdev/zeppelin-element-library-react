@@ -76,7 +76,7 @@ var Pagination = function Pagination(_ref) {
       displayedPages = _useState6[0],
       setDisplayedPages = _useState6[1];
 
-  useEffect(function () {
+  (0, _react.useEffect)(function () {
     var tempPages = Number(pagesProp);
     var tempPagesToDisplay = Number(pagesToDisplayProp) < tempPages ? Number(pagesToDisplayProp) : tempPages;
     var tempDisplayPages = createArray(tempPagesToDisplay, 1);
