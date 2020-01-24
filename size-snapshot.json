@@ -3,5 +3,10 @@
     "bundled": 167434,
     "minified": 49516,
     "gzipped": 14311
+  },
+  "dist/umd/zel-react.production.min.js": {
+    "bundled": 167434,
+    "minified": 49516,
+    "gzipped": 14311
   }
 }

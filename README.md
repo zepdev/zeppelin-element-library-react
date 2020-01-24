@@ -112,3 +112,5 @@ export default Tag;
 This project uses the build files from Material UI (../../babel.config.js). To build this package successfully, you must first clone the Material UI repository and then add this package into @material-ui/packages/.
 
 Note if we remove Downshift, please update the rollup file. We had to change ForwardRef to isForwardRef.
+
+Publish TO NPM from build folder after running yarn build

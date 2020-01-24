@@ -1,6 +1,6 @@
 {
   "name": "@zlab-de/zel-react",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "private": false,
   "author": "Alyssa Butler for Zeppelin GmbH",
   "repository": {
@@ -16,11 +16,12 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "yarn build:cjs && yarn build:esm && yarn build:es && yarn build:umd",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:es && yarn build:umd && yarn copy",
     "build:cjs": "cross-env NODE_ENV=production BABEL_ENV=cjs babel --config-file ../../babel.config.js ./src --out-dir ./build --ignore \"**/*.test.js\"",
     "build:esm": "cross-env NODE_ENV=production BABEL_ENV=esm babel --config-file ../../babel.config.js ./src --out-dir ./build/esm --ignore \"**/*.test.js\"",
     "build:es": "cross-env NODE_ENV=production BABEL_ENV=es babel --config-file ../../babel.config.js ./src --out-dir ./build/es --ignore \"**/*.test.js\"",
-    "build:umd": "cross-env BABEL_ENV=production-umd rollup -c scripts/rollup.config.js"
+    "build:umd": "cross-env BABEL_ENV=production-umd rollup -c scripts/rollup.config.js",
+    "copy": "node scripts/copy-files.js"
   },
   "peerDependencies": {
     "@types/react": "^16.8.6",
@@ -44,15 +45,5 @@
   },
   "engines": {
     "node": ">=8.0.0"
-  },
-  "main": "./build/index.js",
-  "module": "./build/esm/index.js",
-  "browser": "./build/esm/index.js",
-  "unpkg": "./build/umd/zel-react.production.min.js",
-  "files": [
-    "build/*",
-    "assets/*",
-    "guidelines.json",
-    "zel.css"
-  ]
+  }
 }
