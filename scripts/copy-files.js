@@ -84,6 +84,7 @@ async function run() {
         './README.md',
         './zel.css',
         './guidelines.json',
+        './assets/',
       ].map(file => includeFileInBuild(file)),
     );
 

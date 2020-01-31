@@ -10,7 +10,7 @@ yarn add @zlab-de/zel-react
 
 ## Getting Started: Components
 
-This library requires the import of **\*zeppelin-element-library.css** for apply all styles from the Zeppelin Element Library.
+This library requires the import of **\*zel.css** for apply all styles from the Zeppelin Element Library.
 
 ```
 // MyComponent.jsx

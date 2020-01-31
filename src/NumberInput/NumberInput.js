@@ -20,7 +20,7 @@ function NumberInput({ label, count, onChange, onPlus, onMinus, ...other }) {
           height="32"
           viewBox="0 0 32 32"
         >
-          <title>{{ minustitle }}</title>
+          <title>Minus</title>
           <path fill="currentColor" d="M25.333 17.333h-18.667v-2.667h18.667z" />
         </svg>
       </IconButton>
@@ -43,7 +43,7 @@ function NumberInput({ label, count, onChange, onPlus, onMinus, ...other }) {
           height="32"
           viewBox="0 0 32 32"
         >
-          <title>{{ plustitle }}</title>
+          <title>Plus</title>
           <path fill="currentColor" d="M25.333 17.333h-8v8h-2.667v-8h-8v-2.667h8v-8h2.667v8h8z" />
         </svg>
       </IconButton>
