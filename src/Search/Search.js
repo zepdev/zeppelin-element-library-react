@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Downshift from 'downshift';
+import clsx from 'clsx';
 
 const Search = ({ variant, items: itemsProp, placeholder, onChange, ...other }) => {
   const items = itemsProp || [];
   return (
-    <div role={variant === 'landmark' ? 'search' : null} {...other}>
+    <div role={variant === 'header' ? 'search' : null} {...other}>
       <Downshift
-        itemToString={item => (item ? item.value : '')}
-        onChange={selection => onChange(selection)}
+        itemToString={(item) => (item ? item.value : '')}
+        onChange={(selection) => onChange(selection)}
       >
         {({
           getInputProps,
@@ -24,7 +25,13 @@ const Search = ({ variant, items: itemsProp, placeholder, onChange, ...other }) 
             <label {...getLabelProps()} className="zep-visually-hidden">
               {placeholder}
             </label>
-            <input {...getInputProps({ placeholder: placeholder })} className="zep-search__input" />
+            <input
+              {...getInputProps({ placeholder: placeholder })}
+              className={clsx('zep-search__input', {
+                'zep-search__input--searchfield': variant === 'header',
+                'zep-search__input--rounded-left': variant !== 'header',
+              })}
+            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="32"
@@ -39,7 +46,7 @@ const Search = ({ variant, items: itemsProp, placeholder, onChange, ...other }) 
             {isOpen ? (
               <ul {...getMenuProps({ className: 'zep-select__list' })}>
                 {items
-                  .filter(item => !inputValue || item.value.includes(inputValue))
+                  .filter((item) => !inputValue || item.value.includes(inputValue))
                   .map((item, index) => (
                     <li
                       {...getItemProps({

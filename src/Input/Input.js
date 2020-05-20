@@ -11,22 +11,23 @@ const Input = ({
   id,
   label,
   placeholder,
+  type,
   ...other
 }) => {
   return (
     <div
       className={clsx('zep-input-container', {
-        'zep-input-container--error': error
+        'zep-input-container--error': error,
       })}
-      {...other}
     >
       <input
-        type="text"
+        type={type ? type : 'text'}
         className={clsx(classNameProp, 'zep-input')}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
         id={id}
+        {...other}
       />
       <label className="zep-input-container__label" htmlFor={id}>
         {label}
@@ -43,16 +44,13 @@ const Input = ({
 Input.propTypes = {
   className: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  type: PropTypes.oneOf(['text', 'password']),
   onChange: PropTypes.func,
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.object
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.object]),
   id: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   error: PropTypes.bool,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
 };
 
 export default Input;
