@@ -13,7 +13,7 @@ function Select({ items, label, onChange, placeholder, className: classNameProp 
     getItemProps,
   } = useSelect({
     items,
-    onSelectedItemChange: item => {
+    onSelectedItemChange: (item) => {
       onChange(item.selectedItem);
     },
   });
@@ -45,7 +45,12 @@ function Select({ items, label, onChange, placeholder, className: classNameProp 
           <path d="M9.333 18.667h13.333l-6.667 6.667-6.667-6.667zM22.667 13.333h-13.333l6.667-6.667 6.667 6.667z" />
         </svg>
       </button>
-      <ul {...getMenuProps({ className: 'zep-select__list' })}>
+      <ul
+        {...getMenuProps({
+          className: isOpen ? 'zep-select__list' : null,
+          style: { position: 'absolute' },
+        })}
+      >
         {isOpen &&
           items.map((item, index) => (
             <li
