@@ -8,5 +8,10 @@
     "bundled": 167434,
     "minified": 49516,
     "gzipped": 14311
+  },
+  "zel-react.production.min.js": {
+    "bundled": 178708,
+    "minified": 53562,
+    "gzipped": 15645
   }
 }

@@ -36,14 +36,14 @@ async function createModulePackages({ from, to }) {
       };
       const packageJsonPath = path.join(to, directoryPackage, 'package.json');
 
-      const [typingsExist] = await Promise.all([
-        fse.exists(path.join(to, directoryPackage, 'index.d.ts')),
-        fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
-      ]);
+      // const [typingsExist] = await Promise.all([
+      //   fse.exists(path.join(to, directoryPackage, 'index.d.ts')),
+      //   fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
+      // ]);
 
-      if (!typingsExist) {
-        throw new Error(`index.d.ts for ${directoryPackage} is missing`);
-      }
+      // if (!typingsExist) {
+      //   throw new Error(`index.d.ts for ${directoryPackage} is missing`);
+      // }
 
       return packageJsonPath;
     }),
