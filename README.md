@@ -1,5 +1,6 @@
 # A React Component and Icon Library using Zeppelin Element Library
-## ⚠️ This Design System is deprecated and will be removed in 2024 ⚠️
+
+## ⚠️ This Design System is deprecated and no longer maintained. npm packges will stay available, but please make sure to opt out until 2025 ⚠️
 
 Please see (Zeppelin Design System)[https://live-zds.zepdev.net/] for more detailed information.
 
